@@ -1,0 +1,478 @@
+/*
+Theme Name: Flatsome Child
+Description: This is a child theme for Flatsome Theme
+Author: UX Themes
+Template: flatsome
+Version: 3.12
+*/
+
+/*************** ADD CUSTOM CSS HERE.   ***************/
+.div_address2 {
+    background: url(/wp-content/uploads/2022/11/location-icon-gray.png) 0 2px no-repeat;
+    background-size: 20px;
+    padding: 3px 0 5px 30px;
+}
+.div_phone2 {
+    background: url(/wp-content/uploads/2022/11/phone-icon-gray.png) 0 8px no-repeat;
+    background-size: 20px;
+    padding: 3px 0 5px 30px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.div_email2 {
+    background: url(/wp-content/uploads/2022/11/mail-icon-gray.png) 0 7px no-repeat;
+    background-size: 20px;
+    padding: 3px 0 5px 30px;
+    margin-bottom: 5px;
+}
+
+
+
+.vanphongluat {
+    display: none;
+}
+.box-map .col, .box-map p {
+    padding-bottom: 0px;
+	margin-bottom: 0;
+}
+.box-map {
+padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin: 15px 0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.archive .vanphongluat, .single-post .vanphongluat {
+    display: inherit;
+	position: relative;
+    background-color: #f5f5f5;
+    border: 0;
+    padding: 30px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.header-block {
+    min-height: 0;
+}
+.post-sidebar.large-3.col {
+    padding-left: 5px;
+}
+.tooltipx .icon-box {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tooltipx .tooltiptext {
+    cursor: pointer;
+    visibility: hidden;
+width: 100%;
+    background-color: #fff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 9999 !important;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tooltipx:hover .tooltiptext {
+    visibility: visible;
+    cursor: pointer;
+}
+.tooltipx .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 5%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #ccc transparent;
+}
+.div_address3 {
+    background: url(https://visa.thietkeweb3s.com/wp-content/uploads/2022/11/location-icon-gray.png) 0 9px no-repeat;
+    background-size: 20px;
+    padding: 3px 0 5px 30px;
+}
+.div_phone3 {
+    background: url(https://visa.thietkeweb3s.com/wp-content/uploads/2022/11/phone-icon-gray.png) 0 9px no-repeat;
+    background-size: 20px;
+    padding: 3px 0 5px 30px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.service_name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.service_overlay {
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    width: auto;
+    height: 100%;
+    transition: .5s ease;
+	border-radius: 4px;
+    padding: 0px;
+}
+.service_nameSub {
+    padding: 0 10px;
+    text-align: left;
+}
+.service_container > .col-inner{
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.service_container:hover .service_overlay .service_name {
+    text-align: left;
+    padding: 0px;
+}
+.service_container:hover .service_overlay {
+    width: 100%;
+    left: 0;
+    cursor: pointer;
+}
+.box-text.text-center {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+.vanphong .large-12 {
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+.service_overlay .service_name a {
+color: #e9b207;
+}
+.boxdichvu .box-text.text-center {
+	font-size: 17px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    padding:0px;
+}
+.div_team_htitle {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px;
+}
+.div_team_htitle {
+    width: 100%;
+	background:#e9b207;
+}
+.boxdoingu .box-text.text-center {
+    padding: 0px;
+}
+.div_team_container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.div_team_overlay {
+    position: absolute;
+    bottom: 0;
+    top: 100%;
+    right: 0;
+    background-color: #000;
+    overflow: hidden;
+    width: auto;
+    height: 100%;
+    transition: .5s ease;
+}
+.div_team_text {
+    color: #fff;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+}
+.div_team_container:hover .div_team_overlay {
+    width: 100%;
+    top: 0;
+    opacity: .75;
+}
+.div_address1 {
+    font-size: 14px;
+    background: url(/wp-content/uploads/2022/11/location-icon-gray.png) 0 6px no-repeat;
+    background-size: 20px;
+    padding: 3px 0 5px 30px;
+}
+.div_team_phone {
+    background: url(/wp-content/uploads/2022/11/icon_phone_16.png) 0 5px no-repeat;
+    padding: 0 5px 0 25px;
+    display: block;
+    margin-bottom: 5px;
+}
+.div_team_email {
+    background: url(/wp-content/uploads/2022/11/icon_email_16.png) 0 5px no-repeat;
+    padding: 0 5px 0 25px;
+    display: block;
+    margin-bottom: 5px;
+}
+.div_team_text a {
+    color: #fff;
+}
+.wpcf7 input[type="file"] {
+    width: 100%;
+}
+.item_bailienquan {
+    background: #fff url(/wp-content/uploads/2022/11/icon2.png) 10px 13px no-repeat;
+    border-bottom: 1px solid #ddd;
+    padding: 6px 5px 6px 25px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 13px;
+    display: inline-block;
+    width: 100%;
+}
+.div_bailienquan {
+    column-count: 2;
+    column-rule: 1px solid #aaa;
+    column-gap: 40px;
+    vertical-align: top;
+}
+.vanphong {
+    z-index: 10;
+}
+.div_team_overlay2 {
+    position: absolute;
+    bottom: 0;
+    top: 100%;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    overflow: hidden;
+    width: auto;
+    height: 100%;
+    transition: .5s ease;
+}
+.div_leader .div_team_text {
+    bottom: 10%;
+}
+.div_team_text {
+    color: #fff;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+}
+.div_leader .div_team_htitle, .div_leader .div_team_name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    text-shadow: 1px 1px #333, 1px 1px #333;
+}
+.div_leader .div_teamJob {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #fff;
+    font-size: 15px;
+}
+.div_leader .div_teamEmailPhone {
+    margin-top: 25px;
+    padding: 10px;
+    background: #7a1c1b;
+    opacity: 1!important;
+    display: inline-block;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.div_team_container:hover .div_team_overlay2 {
+    width: 100%;
+    top: 0;
+}
+.div_teamEmailPhone {
+    margin-top: 25px;
+    padding: 10px;
+    background: #7a1c1b;
+    opacity: 1!important;
+    display: inline-block;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.divteam2 .div_team_container .box-text.text-center {
+    padding: 10px 0;
+}
+@media (max-width:2600px) and (min-width:1150px) {
+.blog-wrapper.blog-archive .box-image {
+    width: 18% !important;
+}
+.box-vanphong .large-12 {
+    padding-bottom: 20px !important;
+}
+ul#menu-main-menu-1 {
+    display: table;
+    margin: auto;
+}
+.vipbox .accordion.accordion-chowordpress {
+    width: 50%;
+    max-width: 50%;
+    flex-grow: 2;
+    -webkit-flex-grow: 2;
+    vertical-align: top;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+}
+.blog-wrapper.blog-archive .box-text.text-center {
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: left !important;
+    display: inline-block;
+}
+h1.page-title {
+    font-size: 26px;
+}
+.box-vanphong p {
+    margin-bottom: 0;
+}
+.box-vanphong  p {
+    padding-bottom: 0px;
+}
+.row.service_overlay {
+    display: inline-block !important;
+}
+.xbox1 .box-text {
+    padding-bottom: 0px !important;
+}
+.service_overlay p {
+    margin-bottom: 0;
+}
+.xbox1 h5.post-title {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+}
+.service_overlay > .col-inner {
+    padding: 10px;
+}
+.xbox1 a:hover {
+    color: red;
+}
+.accordion-chowordpress .accordion-item a {
+    font-size: 15px;
+}
+
+
+.vipbox {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+.vipbox .accordion-chowordpress .accordion-inner a {
+    width: 100%;
+    color: #333;
+    font-size: 16px;
+}
+.vipbox .accordion-chowordpress .accordion-inner {
+    padding: 15px 0;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+/* Dataroots make form placeholder transparent on focus css method */
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* Firefox 18- */
+input:focus::-moz-placeholder { color:transparent; } /* Firefox 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 8 and older ;) */
+.page .call-now-button {
+    top: 88% !important;
+    display: none;
+    z-index: 9999;
+    clear: both;
+    margin: 0 auto;
+    position: fixed;
+    border-radius: 50px
+}
+.col-acf {
+    display: block;
+    margin-bottom: 10px;
+    clear: both;
+    width: 66%;
+    margin-left: 16px;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  /* CSS */
+	.nav-sidebar.nav-vertical>li+li {
+		border-top: none;
+	}
+	.off-canvas-left .mfp-content, .off-canvas-right .mfp-content {
+		-webkit-overflow-scrolling: touch;
+		background-color: #000;
+		bottom: 0;
+		box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
+		left: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		position: fixed;
+		top: 0;
+		transform: translateX(-270px);
+		transition: transform .2s;
+		width: 260px;
+	}
+	.page .call-now-button {
+		top: 74% !important;
+		display: none;
+		z-index: 9999;
+		clear: both;
+		margin: 0 auto;
+		position: fixed;
+		border-radius: 50px;
+	}
+	
+  
+}
+/*css form visa*/
