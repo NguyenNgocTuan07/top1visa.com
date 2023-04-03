@@ -66,6 +66,17 @@ if(!class_exists('\\WPAICG\\WPAICG_Generator')) {
         public $conclusion;
         public $style_text;
         public $error_msg = false;
+        public $wpaicg_custom_image_settings = array(
+            'artist' => 'None',
+            'photography_style' => 'None',
+            'lighting' => 'Ambient',
+            'subject' => 'None',
+            'camera_settings' => 'Aperture',
+            'composition' => 'Rule of Thirds',
+            'resolution' => '4K (3840x2160)',
+            'color' => 'RGB',
+            'special_effects' => 'Cinemagraph'
+        );
         public $wpaicg_headings = array();
         public $wpaicg_result = array(
             'status'    => 'error',
@@ -160,6 +171,8 @@ if(!class_exists('\\WPAICG\\WPAICG_Generator')) {
                 $this->wpaicg_toc_list = array();
                 $this->generate_continue = false;
                 $this->wpaicg_result['content'] = '';
+                $wpaicg_custom_image_settings = get_option('wpaicg_custom_image_settings',[]);
+                $this->wpaicg_custom_image_settings = wp_parse_args($wpaicg_custom_image_settings, $this->wpaicg_custom_image_settings);
             }
             else{
                 $this->wpaicg_number_of_heading = sanitize_text_field( $_REQUEST["wpai_number_of_heading"] );
@@ -206,6 +219,13 @@ if(!class_exists('\\WPAICG\\WPAICG_Generator')) {
                 $this->wpaicg_preview_title = sanitize_text_field( $_REQUEST["wpai_preview_title"] );
                 $hfHeadings = sanitize_text_field( $_REQUEST["hfHeadings"] );
                 $this->wpaicg_headings = explode( "||", $hfHeadings );
+                if(isset($_REQUEST['wpaicg_custom_image_settings']) && is_array($_REQUEST['wpaicg_custom_image_settings']) && count($_REQUEST['wpaicg_custom_image_settings'])){
+                    $wpaicg_custom_image_settings = wpaicg_util_core()->sanitize_text_or_array_field($_REQUEST['wpaicg_custom_image_settings']);
+                }
+                else{
+                    $wpaicg_custom_image_settings = get_option('wpaicg_custom_image_settings',[]);
+                }
+                $this->wpaicg_custom_image_settings = wp_parse_args($wpaicg_custom_image_settings, $this->wpaicg_custom_image_settings);
             }
             $this->wpaicg_opts = [
                 'model'             => $this->wpaicg_engine,
@@ -688,8 +708,27 @@ if(!class_exists('\\WPAICG\\WPAICG_Generator')) {
                             $_wpaicg_art_style = (isset($this->wpaicg_languages['art_style']) && !empty($this->wpaicg_languages['art_style']) ? ' ' . $this->wpaicg_languages['art_style'] : '');
                             $_wpaicg_image_style = (isset($this->wpaicg_languages['img_styles'][$this->wpaicg_img_style]) && !empty($this->wpaicg_languages['img_styles'][$this->wpaicg_img_style]) ? ' ' . $this->wpaicg_languages['img_styles'][$this->wpaicg_img_style] : '');
                         }
+                        $prompt_image = $this->wpaicg_preview_title . $_wpaicg_art_style . $_wpaicg_image_style;
+                        if($this->wpaicg_custom_image_settings && is_array($this->wpaicg_custom_image_settings) && count($this->wpaicg_custom_image_settings)) {
+                            $prompt_elements = array(
+                                'artist' => 'Painter',
+                                'photography_style' => 'Photography Style',
+                                'composition' => 'Composition',
+                                'resolution' => 'Resolution',
+                                'color' => 'Color',
+                                'special_effects' => 'Special Effects',
+                                'lighting' => 'Lighting',
+                                'subject' => 'Subject',
+                                'camera_settings' => 'Camera Settings',
+                            );
+                            foreach ($this->wpaicg_custom_image_settings as $key => $value) {
+                                if ($value != "None") {
+                                    $prompt_image = $prompt_image . ". " . $prompt_elements[$key] . ": " . $value;
+                                }
+                            }
+                        }
                         $wpaicg_request = $this->wpaicg_image([
-                            "prompt" => $this->wpaicg_preview_title . $_wpaicg_art_style . $_wpaicg_image_style,
+                            "prompt" => $prompt_image,
                             "n" => 1,
                             "size" => $this->wpaicg_img_size,
                             "response_format" => "url",
@@ -732,8 +771,27 @@ if(!class_exists('\\WPAICG\\WPAICG_Generator')) {
                             $_wpaicg_art_style = (isset($this->wpaicg_languages['art_style']) && !empty($this->wpaicg_languages['art_style']) ? ' ' . $this->wpaicg_languages['art_style'] : '');
                             $_wpaicg_image_style = (isset($this->wpaicg_languages['img_styles'][$this->wpaicg_img_style]) && !empty($this->wpaicg_languages['img_styles'][$this->wpaicg_img_style]) ? ' ' . $this->wpaicg_languages['img_styles'][$this->wpaicg_img_style] : '');
                         }
+                        $prompt_image = $this->wpaicg_preview_title . $_wpaicg_art_style . $_wpaicg_image_style;
+                        if($this->wpaicg_custom_image_settings && is_array($this->wpaicg_custom_image_settings) && count($this->wpaicg_custom_image_settings)) {
+                            $prompt_elements = array(
+                                'artist' => 'Painter',
+                                'photography_style' => 'Photography Style',
+                                'composition' => 'Composition',
+                                'resolution' => 'Resolution',
+                                'color' => 'Color',
+                                'special_effects' => 'Special Effects',
+                                'lighting' => 'Lighting',
+                                'subject' => 'Subject',
+                                'camera_settings' => 'Camera Settings',
+                            );
+                            foreach ($this->wpaicg_custom_image_settings as $key => $value) {
+                                if ($value != "None") {
+                                    $prompt_image = $prompt_image . ". " . $prompt_elements[$key] . ": " . $value;
+                                }
+                            }
+                        }
                         $wpaicg_request = $this->wpaicg_image([
-                            "prompt" => $this->wpaicg_preview_title . $_wpaicg_art_style . $_wpaicg_image_style,
+                            "prompt" => $prompt_image,
                             "n" => 1,
                             "size" => $this->wpaicg_img_size,
                             "response_format" => "url",

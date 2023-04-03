@@ -94,9 +94,9 @@ $wpaicg_files_total = $wpdb->get_var( $wpaicg_files_count_sql );
     ?>
     <tr>
         <td><?php echo esc_html($wpaicg_file->post_title);?></td>
-        <td><?php echo date('d.m.Y H:i',strtotime($wpaicg_file->post_date));?></td>
-        <td><?php echo date('d.m.Y H:i',strtotime($wpaicg_file->post_modified));?></td>
-        <td><?php echo size_format(filesize($file));?></td>
+        <td><?php echo esc_html(date('d.m.Y H:i',strtotime($wpaicg_file->post_date)));?></td>
+        <td><?php echo esc_html(date('d.m.Y H:i',strtotime($wpaicg_file->post_modified)));?></td>
+        <td><?php echo esc_html(size_format(filesize($file)));?></td>
         <td>
             <a class="button button-small" href="<?php echo wp_upload_dir()['baseurl'].'/'.esc_html($wpaicg_file->post_title)?>" download>Donwload</a>
             <button class="button button-small wpaicg_convert_upload" data-lines="<?php echo esc_html(count(file($file)))?>" data-file="<?php echo esc_html($wpaicg_file->post_title)?>">Upload</button>

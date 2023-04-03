@@ -1,12 +1,37 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 $success = false;
-if(isset($_POST['wpaicg_limit_price']) && !empty($_POST['wpaicg_limit_price'])){
-    $wpaicg_limit_tokens = \WPAICG\wpaicg_util_core()->sanitize_text_or_array_field($_POST['wpaicg_limit_price']);
-    update_option('wpaicg_limit_tokens_image',$wpaicg_limit_tokens);
+if(isset($_POST['wpaicg_save_image_setting'])) {
+    if (isset($_POST['wpaicg_limit_price']) && !empty($_POST['wpaicg_limit_price'])) {
+        $wpaicg_limit_tokens = \WPAICG\wpaicg_util_core()->sanitize_text_or_array_field($_POST['wpaicg_limit_price']);
+        update_option('wpaicg_limit_tokens_image', $wpaicg_limit_tokens);
+    }
+    $wpaicg_keys = array(
+        'wpaicg_image_surprise_text',
+        'wpaicg_image_generate_text',
+        'wpaicg_image_view_text',
+        'wpaicg_image_save_media_text',
+        'wpaicg_image_select_all_text'
+    );
+    foreach ($wpaicg_keys as $wpaicg_key) {
+        if (isset($_POST[$wpaicg_key]) && !empty($_POST[$wpaicg_key])) {
+            update_option($wpaicg_key, sanitize_text_field($_POST[$wpaicg_key]));
+        }
+    }
+    if (isset($_POST['wpaicg_image_default_prompts']) && !empty($_POST['wpaicg_image_default_prompts'])) {
+        update_option('wpaicg_image_default_prompts', wp_kses_post($_POST['wpaicg_image_default_prompts']));
+    } else {
+        delete_option('wpaicg_image_default_prompts');
+    }
     $success = 'Records updated successfully';
 }
 $wpaicg_settings = get_option('wpaicg_limit_tokens_image',[]);
+$wpaicg_image_surprise_text = get_option('wpaicg_image_surprise_text','Surprise Me');
+$wpaicg_image_generate_text = get_option('wpaicg_image_generate_text','Generate');
+$wpaicg_image_view_text = get_option('wpaicg_image_view_text','View Image');
+$wpaicg_image_save_media_text = get_option('wpaicg_image_save_media_text','Save to Media');
+$wpaicg_image_select_all_text = get_option('wpaicg_image_select_all_text','Select All');
+$wpaicg_image_default_prompts = get_option('wpaicg_image_default_prompts','');
 $wpaicg_roles = wp_roles()->get_names();
 if($success){
     echo '<h4 id="setting_message" style="color: green;">Records successfully updated!</h4>';
@@ -66,8 +91,51 @@ if($success){
             </td>
         </tr>
         <tr>
+            <th><h3>Button Customization</h3></th>
+        </tr>
+        <tr>
+            <th>Surprise</th>
+            <td>
+                <input type="text" name="wpaicg_image_surprise_text" value="<?php echo esc_html($wpaicg_image_surprise_text)?>">
+            </td>
+        </tr>
+        <tr>
+            <th>Generate</th>
+            <td>
+                <input type="text" name="wpaicg_image_generate_text" value="<?php echo esc_html($wpaicg_image_generate_text)?>">
+            </td>
+        </tr>
+        <tr>
+            <th>View Image</th>
+            <td>
+                <input type="text" name="wpaicg_image_view_text" value="<?php echo esc_html($wpaicg_image_view_text)?>">
+            </td>
+        </tr>
+        <tr>
+            <th>Save to Media</th>
+            <td>
+                <input type="text" name="wpaicg_image_save_media_text" value="<?php echo esc_html($wpaicg_image_save_media_text)?>">
+            </td>
+        </tr>
+        <tr>
+            <th>Select All</th>
+            <td>
+                <input type="text" name="wpaicg_image_select_all_text" value="<?php echo esc_html($wpaicg_image_select_all_text)?>">
+            </td>
+        </tr>
+        <tr>
+            <th><h3>Surprise Me Prompts</h3></th>
+        </tr>
+        <tr>
+            <th>Prompts</th>
+            <td>
+                <textarea rows="8" name="wpaicg_image_default_prompts"><?php echo esc_html($wpaicg_image_default_prompts)?></textarea>
+                <span style="font-style: italic">List each prompt on a separate line. When the user selects the "Surprise Me" button, these prompts will appear randomly. If left empty, default prompts will be used.</span>
+            </td>
+        </tr>
+        <tr>
             <th></th>
-            <td><button class="button button-primary">Save</button></td>
+            <td><button class="button button-primary" name="wpaicg_save_image_setting">Save</button></td>
         </tr>
     </table>
 </form>

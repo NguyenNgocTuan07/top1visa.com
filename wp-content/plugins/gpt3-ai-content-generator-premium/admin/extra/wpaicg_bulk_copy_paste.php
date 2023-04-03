@@ -9,7 +9,7 @@ include __DIR__.'/wpaicg_alert.php';
         <tr>
             <th scope="row">
                 Titles<br>
-                <small style="font-weight: normal">(Each title per line)</small>
+                <small style="font-weight: normal">(Enter one title per line.)</small>
             </th>
             <td>
                 <textarea<?php echo empty($wpaicg_cron_added) ? ' disabled':''?> rows="15" class="wpaicg-multi-line"></textarea>

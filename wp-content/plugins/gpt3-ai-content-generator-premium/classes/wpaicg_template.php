@@ -95,7 +95,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Template')) {
                 $exs = array_map('trim', explode("\n", $content));
                 foreach($exs as $ex){
                     if(strpos($ex, '##') !== false){
-                        $new_content[] = '<h1>'.trim(str_replace('##','',$ex)).'</h1>';
+                        $new_content[] = '<h2>'.trim(str_replace('##','',$ex)).'</h2>';
                     }
                     else $new_content[] = $ex;
                 }

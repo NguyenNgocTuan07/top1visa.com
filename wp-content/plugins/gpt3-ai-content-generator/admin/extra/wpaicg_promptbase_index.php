@@ -46,7 +46,7 @@ if(file_exists(WPAICG_PLUGIN_DIR.'admin/data/models.json')){
     }
 }
 $sql = "SELECT p.ID as id,p.post_title as title,p.post_author as author, p.post_content as description";
-$wpaicg_meta_keys = array('prompt','editor','response','category','engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','color','icon','bgcolor','header','dans','ddraft','dclear','dnotice');
+$wpaicg_meta_keys = array('prompt','editor','response','category','engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','color','icon','bgcolor','header','dans','ddraft','dclear','dnotice','generate_text','noanswer_text','draft_text','clear_text','stop_text','cnotice_text');
 foreach($wpaicg_meta_keys as $wpaicg_meta_key){
     $sql .= ",(SELECT ".$wpaicg_meta_key.".meta_value FROM ".$wpdb->postmeta." ".$wpaicg_meta_key." WHERE ".$wpaicg_meta_key.".meta_key='wpaicg_prompt_".$wpaicg_meta_key."' AND p.ID=".$wpaicg_meta_key.".post_id LIMIT 1) as ".$wpaicg_meta_key;
 }
@@ -442,6 +442,30 @@ $allowed_tags = array_merge( $kses_defaults, $svg_args );
                         <option value="no">No</option>
                     </select>
                 </div>
+                <div class="wpaicg-grid-2">
+                    <strong class="wpaicg-d-block mb-5">Generate Button</strong>
+                    <input value="Generate" type="text" name="generate_text" class="regular-text wpaicg-w-100 wpaicg-create-prompt-generate_text">
+                </div>
+                <div class="wpaicg-grid-2">
+                    <strong class="wpaicg-d-block mb-5">No. of Answer Text</strong>
+                    <input value="Number of Answers" type="text" name="noanswer_text" class="regular-text wpaicg-w-100 wpaicg-create-prompt-noanswer_text">
+                </div>
+                <div class="wpaicg-grid-2">
+                    <strong class="wpaicg-d-block mb-5">Draft Text</strong>
+                    <input value="Save Draft" type="text" name="draft_text" class="regular-text wpaicg-w-100 wpaicg-create-prompt-draft_text">
+                </div>
+                <div class="wpaicg-grid-2">
+                    <strong class="wpaicg-d-block mb-5">Clear Text</strong>
+                    <input value="Clear" type="text" name="clear_text" class="regular-text wpaicg-w-100 wpaicg-create-prompt-clear_text">
+                </div>
+                <div class="wpaicg-grid-2">
+                    <strong class="wpaicg-d-block mb-5">Stop Text</strong>
+                    <input value="Stop" type="text" name="stop_text" class="regular-text wpaicg-w-100 wpaicg-create-prompt-stop_text">
+                </div>
+                <div class="wpaicg-grid-2">
+                    <strong class="wpaicg-d-block mb-5">Notice Text</strong>
+                    <input value="Please register to save your result" type="text" name="cnotice_text" class="regular-text wpaicg-w-100 wpaicg-create-prompt-cnotice_text">
+                </div>
             </div>
         </div>
     </div>
@@ -570,6 +594,12 @@ endif;
                             data-ddraft="<?php echo isset($wpaicg_item['ddraft']) ? esc_html($wpaicg_item['ddraft']) : '';?>"
                             data-dclear="<?php echo isset($wpaicg_item['dclear']) ? esc_html($wpaicg_item['dclear']) : '';?>"
                             data-dnotice="<?php echo isset($wpaicg_item['dnotice']) ? esc_html($wpaicg_item['dnotice']) : '';?>"
+                            data-generate_text="<?php echo isset($wpaicg_item['generate_text']) && !empty($wpaicg_item['generate_text']) ? esc_html($wpaicg_item['generate_text']) : 'Generate';?>"
+                            data-noanswer_text="<?php echo isset($wpaicg_item['noanswer_text']) && !empty($wpaicg_item['noanswer_text']) ? esc_html($wpaicg_item['noanswer_text']) : 'Number of Answers';?>"
+                            data-draft_text="<?php echo isset($wpaicg_item['draft_text']) && !empty($wpaicg_item['draft_text']) ? esc_html($wpaicg_item['draft_text']) : 'Save Draft';?>"
+                            data-clear_text="<?php echo isset($wpaicg_item['clear_text']) && !empty($wpaicg_item['clear_text']) ? esc_html($wpaicg_item['clear_text']) : 'Clear';?>"
+                            data-stop_text="<?php echo isset($wpaicg_item['stop_text']) && !empty($wpaicg_item['stop_text']) ? esc_html($wpaicg_item['stop_text']) : 'Stop';?>"
+                            data-cnotice_text="<?php echo isset($wpaicg_item['cnotice_text']) && !empty($wpaicg_item['cnotice_text']) ? esc_html($wpaicg_item['cnotice_text']) : 'Please register to save your result';?>"
                             class="wpaicg-prompt-item wpaicg-d-flex wpaicg-align-items-center <?php echo implode(' ',$wpaicg_item_categories)?><?php echo ' user-'.esc_html($wpaicg_item['author'])?><?php echo ' wpaicg-prompt-item-'.esc_html($wpaicg_item['type']).'-'.esc_html($wpaicg_item['id']);?>">
                             <div class="wpaicg-prompt-icon" style="background: <?php echo esc_html($wpaicg_icon_color)?>"><?php echo wp_kses($wpaicg_icon,$allowed_tags)?></div>
                             <div class="wpaicg-prompt-content">
@@ -608,7 +638,7 @@ endif;
                 <strong>Prompt</strong>
                 <div class="wpaicg-mb-10">
                     <textarea name="title" class="wpaicg-prompt-title" rows="8"></textarea>
-                    <strong>Number of Answers</strong>
+                    <strong class="wpaicg-prompt-text-noanswer_text">Number of Answers</strong>
                     <select class="wpaicg-prompt-max-lines">
                         <?php
                         for($i=1;$i<=10;$i++){
@@ -616,8 +646,8 @@ endif;
                         }
                         ?>
                     </select>
-                    <button class="button button-primary wpaicg-generate-button">Generate</button>
-                    &nbsp;<button type="button" class="button button-primary wpaicg-prompt-stop-generate" style="display: none">Stop</button>
+                    <button class="button button-primary wpaicg-generate-button wpaicg-prompt-text-generate_text">Generate</button>
+                    &nbsp;<button type="button" class="button button-primary wpaicg-prompt-stop-generate wpaicg-prompt-text-stop_text" style="display: none">Stop</button>
                 </div>
                 <div class="mb-5">
                     <div class="wpaicg-prompt-response-editor">
@@ -626,8 +656,8 @@ endif;
                     <div class="wpaicg-prompt-response-element"></div>
                 </div>
                 <div class="wpaicg-prompt-save-result" style="display: none">
-                    <button type="button" class="button button-primary wpaicg-prompt-save-draft">Save Draft</button>
-                    <button type="button" class="button wpaicg-prompt-clear">Clear</button>
+                    <button type="button" class="button button-primary wpaicg-prompt-save-draft wpaicg-prompt-text-draft_text">Save Draft</button>
+                    <button type="button" class="button wpaicg-prompt-clear wpaicg-prompt-text-clear_text">Clear</button>
                 </div>
             </div>
             <div class="wpaicg-grid-1">
@@ -720,7 +750,7 @@ endif;
             $('.wpaicg_modal_title').html('Edit your Prompt');
             $('.wpaicg_modal_content').html('<form action="" method="post" class="wpaicg-create-prompt-form">'+wpaicgPromptContent.html()+'</form>');
             var form = $('.wpaicg-create-prompt-form');
-            var wpaicg_prompt_keys = ['engine','editor','title','description','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','prompt','response','category','icon','color','bgcolor','header','dans','ddraft','dclear','dnotice'];
+            var wpaicg_prompt_keys = ['engine','editor','title','description','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','prompt','response','category','icon','color','bgcolor','header','dans','ddraft','dclear','dnotice','generate_text','noanswer_text','draft_text','clear_text','stop_text','cnotice_text'];
             for(var i = 0; i < wpaicg_prompt_keys.length;i++){
                 var wpaicg_prompt_key = wpaicg_prompt_keys[i];
                 var wpaicg_prompt_key_value = item.attr('data-'+wpaicg_prompt_key);
@@ -743,7 +773,7 @@ endif;
             $('.wpaicg_modal_title').html('Customize your Prompt');
             $('.wpaicg_modal_content').html('<form action="" method="post" class="wpaicg-create-prompt-form">'+wpaicgPromptContent.html()+'</form>');
             var form = $('.wpaicg-create-prompt-form');
-            var wpaicg_prompt_keys = ['engine','editor','title','description','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','prompt','response','category','icon','color','bgcolor','header','dans','ddraft','dclear','dnotice'];
+            var wpaicg_prompt_keys = ['engine','editor','title','description','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','prompt','response','category','icon','color','bgcolor','header','dans','ddraft','dclear','dnotice','generate_text','noanswer_text','draft_text','clear_text','stop_text','cnotice_text'];
             for(var i = 0; i < wpaicg_prompt_keys.length;i++){
                 var wpaicg_prompt_key = wpaicg_prompt_keys[i];
                 var wpaicg_prompt_key_value = item.attr('data-'+wpaicg_prompt_key);
@@ -769,8 +799,8 @@ endif;
             var presence_penalty = form.find('.wpaicg-create-prompt-presence_penalty').val();
             var error_message = false;
             var data = form.serialize();
-            if(max_tokens !== '' && (parseFloat(max_tokens) < 1 || parseFloat(max_tokens) > 4000)){
-                error_message = 'Please enter a valid max tokens value between 1 and 4000';
+            if(max_tokens !== '' && (parseFloat(max_tokens) < 1 || parseFloat(max_tokens) > 8000)){
+                error_message = 'Please enter a valid max tokens value between 1 and 8000';
             }
             else if(temperature !== '' && (parseFloat(temperature) < 0 || parseFloat(temperature) > 1)){
                 error_message = 'Please enter a valid temperature value between 0 and 1';
@@ -832,7 +862,7 @@ endif;
         var wpaicgPromptItem = $('.wpaicg-prompt-item');
         var wpaicgPromptSearch = $('.wpaicg-prompt-search');
         var wpaicgPromptItems = $('.wpaicg-prompt-items');
-        var wpaicgPromptSettings = ["engine","max_tokens","temperature","top_p","best_of","frequency_penalty","presence_penalty","stop","post_title"];
+        var wpaicgPromptSettings = ['engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','post_title','generate_text','noanswer_text','draft_text','clear_text','stop_text','cnotice_text'];
         var wpaicgPromptDefaultContent = $('.wpaicg-prompt-modal-content');
         var wpaicgPromptEditor = false;
         var eventGenerator = false;
@@ -1115,12 +1145,23 @@ endif;
                     $('.wpaicg-prompt-form .wpaicg-prompt-estimated span').html(wpaicg_estimated_cost);
                 }
                 if(item_value !== undefined){
-                    if(item_name !== 'engine' && item_name !== 'stop' && item_name !== 'post_title'){
-                        item_value = parseFloat(item_value);
-                        item_value = item_value.toString().replace(/,/g, '.');
+                    if(
+                        item_name === 'generate_text'
+                        || item_name === 'draft_text'
+                        || item_name === 'noanswer_text'
+                        || item_name === 'clear_text'
+                        || item_name === 'stop_text'
+                    ){
+                        $('.wpaicg-prompt-text-'+item_name).html(item_value);
                     }
-                    $('.wpaicg-prompt-form .wpaicg-prompt-'+item_name).find('[name='+item_name+']').val(item_value);
-                    $('.wpaicg-prompt-form .wpaicg-prompt-'+item_name).show();
+                    else{
+                        if(item_name !== 'engine' && item_name !== 'stop' && item_name !== 'post_title'){
+                            item_value = parseFloat(item_value);
+                            item_value = item_value.toString().replace(/,/g, '.');
+                        }
+                        $('.wpaicg-prompt-form .wpaicg-prompt-'+item_name).find('[name='+item_name+']').val(item_value);
+                        $('.wpaicg-prompt-form .wpaicg-prompt-'+item_name).show();
+                    }
                 }
                 else{
                     $('.wpaicg-prompt-form .wpaicg-prompt-'+item_name).hide();
@@ -1187,8 +1228,8 @@ endif;
                 if(max_tokens === ''){
                     error_message = 'Please enter max tokens';
                 }
-                else if(parseFloat(max_tokens) < 1 || parseFloat(max_tokens) > 4000){
-                    error_message = 'Please enter a valid max tokens value between 1 and 4000';
+                else if(parseFloat(max_tokens) < 1 || parseFloat(max_tokens) > 8000){
+                    error_message = 'Please enter a valid max tokens value between 1 and 8000';
                 }
                 else if(temperature === ''){
                     error_message = 'Please enter temperature';

@@ -106,6 +106,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                 alert("Limited 15 headings");
                 return false;
             }
+            let wpaicg_custom_image_settings = {};
+            $('[name^=wpaicg_custom_image_settings]').each(function(idx, elem) {
+                let name = $(elem).attr('name');
+                name = name.replace(/wpaicg_custom_image_settings/g,'');
+                name = name.replace('[','');
+                name = name.replace(']','');
+                wpaicg_custom_image_settings[name] = $(elem).val();
+            });
             var wpaicg_toc = $('#wpaicg_toc:checked').val();
             wpaicg_toc = wpaicg_toc ? wpaicg_toc : 0;
             var wpai_language = $("#wpai_language").val();
@@ -135,25 +143,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             var wpai_modify_headings = $('#wpai_modify_headings').val();
             var is_generate_continue = $('#is_generate_continue').val();
             var hfHeadings = $("#hfHeadings").val();
-            console.log("prompt input", wpai_preview_title)
-            console.log("number of heading", wpai_number_of_heading)
-            console.log("language", wpai_language)
-            console.log("add intro", wpai_add_intro)
-            console.log("add conclusion", wpai_add_conclusion)
-            console.log("writing style", wpai_writing_style)
-            console.log("writing tone", wpai_writing_tone)
-            console.log("modify heading", wpai_modify_headings)
-            console.log("Headings ", hfHeadings)
-            console.log("keywords", wpai_keywords)
-            console.log("keyword bold: ", $("#wpai_add_keywords_bold").val())
-            console.log("heading tag: ", $("#wpai_heading_tag").val())
-            console.log("words to avoid: ", $("#wpai_words_to_avoid").val())
-            console.log("add tagline: ", $("#wpai_add_tagline").val())
-            console.log("add faq: ", $("#wpai_add_faq").val())
-            console.log("target url: ", $("#wpai_target_url").val())
-            console.log("anchor text: ", $("#wpai_anchor_text").val())
-            console.log("target url cta: ", $("#wpai_target_url_cta").val())
-            console.log("cta pos: ", $("#wpai_cta_pos").val());
+
             /*
             * Add Image and Featured
             * */
@@ -208,7 +198,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                 'wpaicg_toc_title_tag': wpaicg_toc_title_tag,
                 'wpaicg_intro_title_tag': wpaicg_intro_title_tag,
                 'wpaicg_conclusion_title_tag': wpaicg_conclusion_title_tag,
-                'wpaicg_toc_list': ''
+                'wpaicg_toc_list': '',
+                'wpaicg_custom_image_settings': wpaicg_custom_image_settings
             };
             $('#wpcgai_preview_box').text('');
             $('#wpcgai_preview_box').val('');

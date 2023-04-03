@@ -183,7 +183,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 </style>
 <?php
 $wpaicg_art_file = WPAICG_PLUGIN_DIR . 'admin/data/art.json';
-
 $wpaicg_painter_data = file_get_contents($wpaicg_art_file);
 $wpaicg_painter_data = json_decode($wpaicg_painter_data, true);
 
@@ -201,6 +200,11 @@ $wpaicg_show_setting = true;
 $wpaicg_save_media = true;
 $wpaicg_show_dalle = true;
 $wpaicg_show_sd = true;
+$wpaicg_image_surprise_text = get_option('wpaicg_image_surprise_text','Surprise Me');
+$wpaicg_image_generate_text = get_option('wpaicg_image_generate_text','Generate');
+$wpaicg_image_view_text = get_option('wpaicg_image_view_text','View Image');
+$wpaicg_image_save_media_text = get_option('wpaicg_image_save_media_text','Save to Media');
+$wpaicg_image_select_all_text = get_option('wpaicg_image_select_all_text','Select All');
 if(isset($wpaicg_image_shortcode) && $wpaicg_image_shortcode){
     if(isset($wpaicg_shortcode_settings) && is_array($wpaicg_shortcode_settings)){
         if(
@@ -236,7 +240,7 @@ if(isset($wpaicg_image_shortcode) && $wpaicg_image_shortcode){
         $wpaicg_show_setting = false;
     }
 }
-$wpaicg_shortcode_text = '[wpcgai_img';
+$wpaicg_shortcode_text = 'wpcgai_img';
 if($wpaicg_show_dalle){
     $wpaicg_shortcode_text .= ' dalle=yes';
 }
@@ -246,7 +250,21 @@ if($wpaicg_show_sd){
 if($wpaicg_show_setting){
     $wpaicg_shortcode_text .= ' settings=yes';
 }
-$wpaicg_shortcode_text .= ']';
+$wpaicg_image_default_prompts = get_option('wpaicg_image_default_prompts','');
+$wpaicg_image_prompts = array();
+if(!empty($wpaicg_image_default_prompts)){
+    $exs = array_map('trim', explode("\n", $wpaicg_image_default_prompts));
+    if($exs && is_array($exs) && count($exs)) {
+        foreach ($exs as $ex) {
+            if(!empty($ex)){
+                $wpaicg_image_prompts[] = str_replace("\\",'',$ex);
+            }
+        }
+    }
+}
+if(count($wpaicg_image_prompts)){
+    $wpaicg_painter_data['prompts'] = $wpaicg_image_prompts;
+}
 ?>
 <div class="wrap fs-section wpaicg-image-generator<?php echo isset($wpaicg_image_shortcode) && $wpaicg_image_shortcode ? ' wpaicg-image-shortcode':''?>">
     <?php
@@ -293,21 +311,21 @@ $wpaicg_shortcode_text .= ']';
                         <div class="wpaicg-mb-5">
                             <label for="prompt">Prompt:</label>
                             <textarea name="prompt" id="prompt" rows="2" cols="50"><?php echo esc_html($wpaicg_painter_data['prompts'][array_rand($wpaicg_painter_data['prompts'])])?></textarea>
-                            <button class="button button-primary wpaicg-button" type="button" onclick="getRandomPrompt()">Surprise Me</button>
-                            <button class="button button-primary wpaicg-button wpaicg_button_generate" id="wpaicg_button_generate">Generate</button>
+                            <button class="button button-primary wpaicg-button" type="button" onclick="getRandomPrompt()"><?php echo esc_html($wpaicg_image_surprise_text)?></button>
+                            <button class="button button-primary wpaicg-button wpaicg_button_generate" id="wpaicg_button_generate"><?php echo esc_html($wpaicg_image_generate_text)?></button>
                         </div>
                         <div class="image-generated">
                             <div class="image-generate-loading" id="image-generate-loading"><div class="lds-dual-ring"></div></div>
                             <div class="image-grid wpaicg-mb-5" id="image-grid">
                             </div>
                             <div style="<?php echo is_user_logged_in()? '' : 'display:none'?>">
-                            <a href="javascript:void(0)" id="wpaicg_image_select_all" class="wpaicg_image_select_all" style="display: none">Select All</a><br><br>
+                            <a href="javascript:void(0)" id="wpaicg_image_select_all" class="wpaicg_image_select_all" style="display: none"><?php echo esc_html($wpaicg_image_select_all_text)?></a><br><br>
                             <div id="wpaicg_message" class="wpaicg_message" style="text-align: center;margin-top: 10px;"></div>
                             <div class="wpaicg-convert-progress wpaicg-convert-bar" id="wpaicg-convert-bar">
                                 <span></span>
                                 <small>0%</small>
                             </div>
-                            <button type="button" id="image-generator-save" class="button button-primary wpaicg-button image-generator-save" style="width: 100%;display: none">Save to Media</button>
+                            <button type="button" id="image-generator-save" class="button button-primary wpaicg-button image-generator-save" style="width: 100%;display: none"><?php echo esc_html($wpaicg_image_save_media_text)?></button>
                             </div>
                         </div>
                         <?php
@@ -565,6 +583,9 @@ if($wpaicg_action !== 'shortcodes' && $wpaicg_action != 'logs'):
         $wpaicg_art_file = WPAICG_PLUGIN_DIR . 'admin/data/art.json';
         $wpaicg_prompt_data = file_get_contents($wpaicg_art_file);
         $wpaicg_prompt_data = json_decode($wpaicg_prompt_data, true);
+        if(count($wpaicg_image_prompts)){
+            $wpaicg_prompt_data['prompts'] = $wpaicg_image_prompts;
+        }
         ?>
         var randomIndex = Math.floor(Math.random() * <?php echo esc_html(count($wpaicg_prompt_data['prompts'])); ?>);
         document.getElementById("prompt").value = <?php echo json_encode($wpaicg_prompt_data['prompts']); ?> [randomIndex];
@@ -675,7 +696,7 @@ if($wpaicg_action !== 'shortcodes' && $wpaicg_action != 'logs'):
         document.querySelectorAll('.wpaicg_modal_content')[0].innerHTML = '';
         document.querySelectorAll('.wpaicg-overlay')[0].style.display = 'block';
         document.querySelectorAll('.wpaicg_modal')[0].style.display = 'block';
-        document.querySelectorAll('.wpaicg_modal_title')[0].innerHTML = 'View Image';
+        document.querySelectorAll('.wpaicg_modal_title')[0].innerHTML = '<?php echo esc_html($wpaicg_image_view_text)?>';
         var html = '';
         html += '<img src="'+url+'" style="width: 100%">';
         document.querySelectorAll('.wpaicg_modal_content')[0].innerHTML = html;
@@ -724,7 +745,7 @@ if($wpaicg_action !== 'shortcodes' && $wpaicg_action != 'logs'):
                             if(start === max){
                                 wpaicgImageRmLoading(wpaicgImageGenerateBtn);
                                 wpaicgImageSelectAll.classList.remove('selectall')
-                                wpaicgImageSelectAll.innerHTML = 'Select All';
+                                wpaicgImageSelectAll.innerHTML = '<?php echo esc_html($wpaicg_image_select_all_text)?>';
                                 wpaicgImageSelectAll.style.display = 'block';
                                 wpaicgImageLoading.style.display = 'none';
                                 wpaicgImageSaveBtn.style.display = 'block';
@@ -738,7 +759,7 @@ if($wpaicg_action !== 'shortcodes' && $wpaicg_action != 'logs'):
                                 let endTime = new Date();
                                 let timeDiff = endTime - wpaicgStartTime;
                                 timeDiff = timeDiff/1000;
-                                data += '&action=wpaicg_image_log&duration='+timeDiff+'&_wpnonce_image_log='+wpaicgImageNonce+'&shortcode='+wpaicgImageShortcode+'&source_id='+wpaicgImageSourceID;
+                                data += '&action=wpaicg_image_log&duration='+timeDiff+'&_wpnonce_image_log='+wpaicgImageNonce+'&shortcode=['+wpaicgImageShortcode+']&source_id='+wpaicgImageSourceID;
                                 const xhttp = new XMLHttpRequest();
                                 xhttp.open('POST', '<?php echo admin_url('admin-ajax.php')?>');
                                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -751,7 +772,7 @@ if($wpaicg_action !== 'shortcodes' && $wpaicg_action != 'logs'):
                             }
                             wpaicgImageRmLoading(wpaicgImageGenerateBtn);
                             wpaicgImageSelectAll.classList.remove('selectall')
-                            wpaicgImageSelectAll.innerHTML = 'Select All';
+                            wpaicgImageSelectAll.innerHTML = '<?php echo esc_html($wpaicg_image_select_all_text)?>';
                             wpaicgImageSelectAll.style.display = 'block';
                             wpaicgImageLoading.style.display = 'none';
                             wpaicgImageSaveBtn.style.display = 'block';
@@ -882,7 +903,7 @@ if($wpaicg_action !== 'shortcodes' && $wpaicg_action != 'logs'):
     wpaicgImageSelectAll.addEventListener('click', function (e){
         if(wpaicgImageSelectAll.classList.contains('selectall')){
             wpaicgImageSelectAll.classList.remove('selectall');
-            wpaicgImageSelectAll.innerHTML = 'Select All';
+            wpaicgImageSelectAll.innerHTML = '<?php echo esc_html($wpaicg_image_select_all_text)?>';
             document.querySelectorAll('.wpaicg-image-item input[type=checkbox]').forEach(function(item){
                 item.checked = false;
             })

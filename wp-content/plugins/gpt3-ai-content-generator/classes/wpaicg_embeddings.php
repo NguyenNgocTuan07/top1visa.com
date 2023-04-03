@@ -19,7 +19,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Embeddings')) {
         {
             add_action('wp_ajax_wpaicg_embeddings',[$this,'wpaicg_embeddings']);
             add_action( 'admin_menu', array( $this, 'wpaicg_menu' ) );
-            add_action('init',[$this,'wpaicg_cron_job'],1);
+            add_action('init',[$this,'wpaicg_cron_job'],9999);
             add_action('wp_ajax_wpaicg_builder_reindex',[$this,'wpaicg_builder_reindex']);
             add_action('wp_ajax_wpaicg_builder_delete',[$this,'wpaicg_builder_delete']);
             add_action('wp_ajax_wpaicg_builder_list',[$this,'wpaicg_builder_list']);
@@ -397,7 +397,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Embeddings')) {
                     fclose($wpaicg_file);
                     try {
                         $_SERVER["REQUEST_METHOD"] = 'GET';
-                        chmod($wpaicg_running,0777);
+                        chmod($wpaicg_running,0755);
                         $this->wpaicg_builer();
                     }
                     catch (\Exception $exception){
@@ -414,6 +414,97 @@ if(!class_exists('\\WPAICG\\WPAICG_Embeddings')) {
             }
         }
 
+        public function wpaicg_print_array($arr, $pad = 0, $padStr = "\t")
+        {
+            $outerPad = $pad;
+            $innerPad = $pad + 1;
+            $out = '[';
+            foreach ($arr as $k => $v) {
+                if (is_array($v)) {
+                    $out .= str_repeat($padStr, $innerPad) . $k . ': ' . $this->wpaicg_print_array($v, $innerPad);
+                } else {
+                    $out .= str_repeat($padStr, $innerPad) . $k . ': ' . $v;
+                }
+            }
+            $out .= str_repeat($padStr, $outerPad) . ']';
+            return $out;
+        }
+
+        public function wpaicg_custom_post_type($content, $post)
+        {
+            if(!in_array($post->post_type, array('post','page','product'))){
+                $wpaicg_custom_post_fields = get_option('wpaicg_builder_custom_'.$post->post_type,'');
+                $new_content = '';
+                if(!empty($wpaicg_custom_post_fields)){
+                    $exs = explode('||',$wpaicg_custom_post_fields);
+                    foreach($exs as $ex){
+                        $item = explode('##',$ex);
+                        if($item && is_array($item) && count($item) == 2){
+                            $key = $item[0];
+                            $name = $item[1];
+                            /*Check is standard field*/
+                            if(substr($key,0,8) == 'wpaicgp_'){
+                                $post_key = str_replace('wpaicgp_','',$key);
+                                if($post_key == 'post_content'){
+                                    $post_value = $content;
+                                }
+                                elseif($post_key == 'post_date'){
+                                    $post_value = get_the_date('', $post->ID);
+                                }
+                                elseif($post_key == 'post_parent'){
+                                    $post_value = get_the_title($post->post_parent);
+                                }
+                                elseif($post_key == 'permalink'){
+                                    $post_value = get_permalink($post->ID);
+                                }
+                                else{
+                                    $post_value = $post->$post_key;
+                                }
+                                $new_content .= (empty($new_content) ? '': "\n"). $name.': '.$post_value;
+                            }
+                            /*Check if Custom Meta*/
+                            if(substr($key,0,9) == 'wpaicgcf_'){
+                                $meta_key = str_replace('wpaicgcf_','',$key);
+                                $meta_value = get_post_meta($post->ID,$meta_key,true);
+                                $meta_value = apply_filters('wpaicg_meta_value_embedding',$meta_value,$post,$meta_key);
+                                if(is_array($meta_value)){
+                                    $meta_value = $this->wpaicg_print_array($meta_value);
+                                }
+                                $new_content .= (empty($new_content) ? '': "\n"). $name.': '.$meta_value;
+                            }
+                            /*Check if is author fields*/
+                            if(substr($key,0,13) == 'wpaicgauthor_'){
+                                $user_key = str_replace('wpaicgauthor_','',$key);
+                                $author = get_user_by('ID',$post->post_author);
+                                $new_content .= (empty($new_content) ? '': "\n"). $name.': '.$author->$user_key;
+                            }
+                            /*Check Taxonomies*/
+                            if(substr($key,0,9) == 'wpaicgtx_'){
+                                $taxonomy = str_replace('wpaicgtx_','',$key);
+                                $terms = get_the_terms($post->ID,$taxonomy);
+                                if(!is_wp_error($terms)){
+                                    $terms_string = join(', ', wp_list_pluck($terms, 'name'));
+                                    if(!empty($terms_string)){
+                                        $new_content .= (empty($new_content) ? '': "\n"). $name.': '.$terms_string;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(empty($new_content)){
+                        $new_content .= 'Post Title: '.$post->post_title;
+                        $new_content .= "\n".'Post Content: '.$content;
+                    }
+                }
+                else{
+                    $new_content .= 'Post Title: '.$post->post_title;
+                    $new_content .= "\n".'Post Content: '.$content;
+                }
+                $content = $new_content;
+            }
+            return $content;
+        }
+
         public function wpaicg_builder_data($wpaicg_data)
         {
             global $wpdb;
@@ -424,6 +515,8 @@ if(!class_exists('\\WPAICG\\WPAICG_Embeddings')) {
                 $wpaicg_content = preg_replace_callback("/$pattern/", 'strip_shortcode_tag', $wpaicg_content);
             }
             $wpaicg_content = trim($wpaicg_content);
+            $wpaicg_content = preg_replace("/<((?:style)).*>.*<\/style>/si", ' ',$wpaicg_content);
+            $wpaicg_content = preg_replace("/<((?:script)).*>.*<\/script>/si", ' ',$wpaicg_content);
             $wpaicg_content = preg_replace('/<a(.*)href="([^"]*)"(.*)>(.*?)<\/a>/i', '$2', $wpaicg_content);
             $wpaicg_content = strip_tags($wpaicg_content);
             $wpaicg_content = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $wpaicg_content);
@@ -538,6 +631,10 @@ if(!class_exists('\\WPAICG\\WPAICG_Embeddings')) {
                         $wpaicg_content = $wpaicg_content_product;
                     }
                 }
+                /*For custom post type*/
+                $wpaicg_content = $this->wpaicg_custom_post_type($wpaicg_content,$wpaicg_data);
+                $wpaicg_content = apply_filters('wpaicg_embedding_content_custom_post_type',$wpaicg_content,$wpaicg_data);
+                /*End for custom post_type*/
                 $wpaicg_result = $this->wpaicg_save_embedding($wpaicg_content, 'wpaicg_builder', $wpaicg_data->post_title, $wpaicg_old_builder);
                 if ($wpaicg_result && is_array($wpaicg_result) && isset($wpaicg_result['status'])) {
                     if ($wpaicg_result['status'] == 'error') {
@@ -607,7 +704,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Embeddings')) {
                 $wpaicg_builder_types = get_option('wpaicg_builder_types', []);
                 $wpaicg_builder_enable = get_option('wpaicg_builder_enable', '');
                 if ($wpaicg_builder_enable == 'yes' && is_array($wpaicg_builder_types) && count($wpaicg_builder_types)) {
-                    $wpaicg_sql = "SELECT p.ID,p.post_title, p.post_content,p.post_type,p.post_excerpt FROM " . $wpdb->posts . " p LEFT JOIN " . $wpdb->postmeta . " m ON m.post_id=p.ID AND m.meta_key='wpaicg_indexed' WHERE (m.meta_value IS NULL OR m.meta_value='' OR m.meta_value='reindex') AND p.post_content!='' AND p.post_type IN ('" . implode("','", $wpaicg_builder_types) . "') AND p.post_status = 'publish' ORDER BY p.ID ASC LIMIT 1";
+                    $wpaicg_sql = "SELECT p.ID,p.post_title, p.post_content,p.post_type,p.post_excerpt,p.post_date,p.post_parent,p.post_status,p.post_author FROM " . $wpdb->posts . " p LEFT JOIN " . $wpdb->postmeta . " m ON m.post_id=p.ID AND m.meta_key='wpaicg_indexed' WHERE (m.meta_value IS NULL OR m.meta_value='' OR m.meta_value='reindex') AND p.post_content!='' AND p.post_type IN ('" . implode("','", $wpaicg_builder_types) . "') AND p.post_status = 'publish' ORDER BY p.ID ASC LIMIT 1";
                     $wpaicg_data = $wpdb->get_row($wpaicg_sql);
                     if($wpaicg_data) {
                         $wpaicg_has_builder_run = true;

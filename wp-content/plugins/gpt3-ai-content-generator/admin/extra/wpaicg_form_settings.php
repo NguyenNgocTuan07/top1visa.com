@@ -2,6 +2,10 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 $success = false;
 if(isset($_POST['wpaicg_limit_tokens']) && !empty($_POST['wpaicg_limit_tokens'])){
+    // Check the nonce
+    if ( ! isset( $_POST['wpaicg_limit_tokens_nonce'] ) || ! wp_verify_nonce( $_POST['wpaicg_limit_tokens_nonce'], 'wpaicg_limit_tokens_action' ) ) {
+        wp_die( 'Nonce verification failed.' );
+    }
     $success = true;
     $wpaicg_limit_tokens = \WPAICG\wpaicg_util_core()->sanitize_text_or_array_field($_POST['wpaicg_limit_tokens']);
     update_option('wpaicg_limit_tokens_form',$wpaicg_limit_tokens);
@@ -14,6 +18,7 @@ if($success){
 ?>
 <h3>Token Handling</h3>
 <form action="" method="post">
+    <?php wp_nonce_field('wpaicg_limit_tokens_action', 'wpaicg_limit_tokens_nonce'); ?>
     <table class="form-table">
         <tr>
             <th>Limit Registered User:</th>

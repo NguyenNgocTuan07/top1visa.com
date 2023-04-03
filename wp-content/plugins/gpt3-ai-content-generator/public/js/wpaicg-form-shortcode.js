@@ -83,8 +83,8 @@ if(typeof wpaicgForm !== "undefined" && wpaicgForm != undefined && wpaicgForm.le
             error_message = 'Please insert prompt';
         } else if (max_tokens === '') {
             error_message = 'Please enter max tokens';
-        } else if (parseFloat(max_tokens) < 1 || parseFloat(max_tokens) > 4000) {
-            error_message = 'Please enter a valid max tokens value between 1 and 4000';
+        } else if (parseFloat(max_tokens) < 1 || parseFloat(max_tokens) > 8000) {
+            error_message = 'Please enter a valid max tokens value between 1 and 8000';
         } else if (temperature === '') {
             error_message = 'Please enter temperature';
         } else if (parseFloat(temperature) < 0 || parseFloat(temperature) > 1) {

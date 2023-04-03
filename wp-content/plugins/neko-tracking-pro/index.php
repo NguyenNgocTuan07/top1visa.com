@@ -930,6 +930,3 @@ function vithanhlam_field_groups() {
 	}
 
 }
-
-
-

@@ -14,7 +14,7 @@ function my_custom_link( $menu_links ){
 
     // Insert your custom link
     $menu_links['cap-nhat-thong-tin-ds160-my'] = __( 'Cập nhật Thông Tin DS160', 'woocommerce' );
-	$menu_links['cap-nhat-thong-tin-ds160-'] = __( 'Cập Nhật Thông Tin Visa Pháp', 'woocommerce' );
+	$menu_links['dien-form-thong-tin-visa-du-lich'] = __( 'Cập Nhật Thông Tin Visa Du Lịch ', 'woocommerce' );
 
     // Insert the logout link back to the end of the menu
    // $menu_links['customer-logout'] = $logout;

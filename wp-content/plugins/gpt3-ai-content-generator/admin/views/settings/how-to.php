@@ -11,7 +11,42 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         $image_generator_page_url = admin_url( 'admin.php?page=wpaicg_image_generator' );
         $promptbase_page_url = admin_url( 'admin.php?page=wpaicg_promptbase' );
         $gpt_forms_page_url = admin_url( 'admin.php?page=wpaicg_forms' );
+        $chatgpt_shortcode_page_url = admin_url( 'admin.php?page=wpaicg_chatgpt' );
+        $chatgpt_widget_page_url = admin_url( 'admin.php?page=wpaicg_chatgpt&action=widget' );
+        $chatgpt_bots_page_url = admin_url( 'admin.php?page=wpaicg_chatgpt&action=bots' );
         ?>
+        <h2>What is GPT AI Power</h2>
+        <p>GPT AI Power is a WordPress plugin that allows you to generate content, images, audio, and more using the power of AI.</p>
+        <p>It is a complete AI pack that includes ChatGPT, Content Writer, Auto Content Writer, AI Assistant, AI Forms, Image Generator, Audio Converter, WooCommerce Product Writer, SEO optimizer, AI Training, Embeddings, Title Suggester and more.</p>
+        <hr>
+        <h2>How It Works</h2>
+        <p>Our plugin works with the OpenAI API. To use it, you need to create an account on OpenAI and <a href="https://beta.openai.com/account/api-keys" target="_blank">obtain your API key</a>. OpenAI provides $5 in free credit for new users. If you encounter the message <b>"You exceeded your current quota, please check your plan and billing details."</b> it indicates that you have exhausted your OpenAI quota and need to purchase additional credit from OpenAI.</p>
+        <p>Purchasing our plugin does not provide any credit from OpenAI. When you buy our plugin, you gain access to the pro features of the plugin, but it does not include any API credit. You will still need to purchase credit from OpenAI separately.</p>
+        <p>If you experience any slowness or content not being generated, it may be due to issues with OpenAI API services. Please wait for their services to return to normal before trying again.</p>
+        <hr>
+        <h2>How to Setup API Key</h2>
+        <p>1. Go to <a href="https://platform.openai.com/account/api-keys" target="_blank">OpenAI</a> and generate your API key.</p>
+        <p>2. Go to <u><b>AI Engine</b></u> tab in this page.</p>
+        <p>3. Enter your API key and click the Save button.</p>
+        <p>4. Done!</p>
+        <hr>
+        <h2>How to Add ChatGPT to Your Website</h2>
+        <p>You can create unlimited chatGPT bots that your know content.</p>
+        <p>Learn how you can teach your content to the chat bot: <u><b><a href="https://youtu.be/NPMLGwFQYrY" target="_blank">https://youtu.be/NPMLGwFQYrY</a></u></b></p>
+        <p>There are 3 different ways to add a chatbox in your website.</p>
+        <b>1. Using the ShortCode</b>
+        <p>Go to <u><b><a href="<?php
+                    echo  esc_html( $chatgpt_shortcode_page_url ) ;
+                    ?>">ChatGPT - ShortCode</a></b></u> page and configure your shortcode. To add the chat bot to your website, please create a new page or post and include the shortcode <code>[wpaicg_chatgpt]</code> in the desired location on your site. This will allow your users to interact with the bot directly from the frontend of your website.</p>
+        <b>2. Using the Widget</b>
+        <p>Go to <u><b><a href="<?php
+                    echo  esc_html( $chatgpt_widget_page_url ) ;
+                    ?>">ChatGPT - Widget</a></b></u> page and configure your widget. This will allow your users to interact with the bot directly from the frontend of your website.</p>
+        <b>3. Creating Customized Bots</b>
+        <p>You can also created bots with different parameters for different pages <u><b><a href="<?php
+                    echo  esc_html( $chatgpt_bots_page_url ) ;
+                    ?>">here</a></b></u>.</p>
+        <hr>
         <h2>How to Use Content Writer</h2>
         <p>1. Go to <u><b><a href="<?php
                     echo  esc_html( $single_content_page_url ) ;
@@ -44,16 +79,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         <p>4. Click on the "Generate" button.</p>
         <p>5. Click on the "Save Draft" button.</p>
         <p>6. Done!</p>
-        <hr>
-
-        <h2>How to Add ChatBox to your page.</h2>
-        <p>Learn how you can teach your content to the chat bot: <u><b><a href="https://youtu.be/NPMLGwFQYrY" target="_blank">https://youtu.be/NPMLGwFQYrY</a></u></b></p>
-        <p>There are 2 different ways to add a chatbox in your website.</p>
-        <h3>1. Using the ShortCode</h3>
-        <p>Go to ChatGPT - Shortcode and configure your chat bot. To add the chat bot to your website, please create a new page or post and include the shortcode <code>[wpaicg_chatgpt]</code> in the desired location on your site. This will allow your users to interact with the bot directly from the frontend of your website.</p>
-        <h3>2. Using the Widget</h3>
-        <p>Go to ChatGPT - Widget and configure your chat bot. This will allow your users to interact with the bot directly from the frontend of your website.</p>
-       
         <hr>
         <h2>How to Fine-Tune your model.</h2>
         <p>You can train your own model based on an existing GPT model.<p>
@@ -113,9 +138,18 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         <p>2. Once step number 1 is completed then you can customize and embed short code for semantic search in your website.</p>
         <p>3. Copy the following code and paste it in your page or post where you want to show the search box: <code>[wpaicg_search]</code></p>
         <hr>
+        <h2>How to Use AI Assistant</h2>
+        <p>AI Assistant is a feature that allows you to add a button to the WordPress editor that will help you to create content. You can add your own menus with your own prompts.</p>
+        <p>AI Assistant is compatible with both Gutenberg and Classic Editor.</p>
+        <p>1. Go to your Gutenberg or Classic Edtor and look for our logo in the toolbar.</p>
+        <p>2. Click on the logo and select the menu you want to use.</p>
+        <p>3. Click the prompt you want to use.</p>
+        <p>5. Done!</p>
+        <hr>
         <h2>Contact</h2>
         <p>For more information about the plugin, please visit <u><b><a href="https://gptaipower.com/" target="_blank">our website</a></u></b>.</p>
         <p>If you have any questions, suggestion, feedback please contact me: <b>senols@gmail.com</b> </p>
+        <p>I am also on <u><b><a href="https://twitter.com/sengpt" target="_blank">Twitter</a></u></b>.</p>
         <p>You can also join our Discord community <u><b><a href="https://discord.gg/EtkpBZYY6v" target="_blank">here</a></u></b>.</p>
         <hr>
         <h2>Notes</h2>

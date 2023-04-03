@@ -41,6 +41,7 @@ if ( strstr( $_SERVER['REQUEST_URI'], 'wp-admin/post-new.php' ) ) {
     $wpaicg_featured_image_source = get_option('wpaicg_featured_image_source','');
     $wpaicg_pexels_orientation = get_option('wpaicg_pexels_orientation','');
     $wpaicg_pexels_size = get_option('wpaicg_pexels_size','');
+    $wpaicg_custom_image_settings = get_option('wpaicg_custom_image_settings',[]);
 } else {
 
     if ( strstr( $_SERVER['REQUEST_URI'], 'wp-admin/post.php' ) ) {
@@ -80,10 +81,22 @@ if ( strstr( $_SERVER['REQUEST_URI'], 'wp-admin/post-new.php' ) ) {
         $wpaicg_featured_image_source = get_post_meta($post->ID,'wpaicg_featured_image_source',true);
         $wpaicg_pexels_orientation = get_post_meta($post->ID,'wpaicg_pexels_orientation',true);
         $wpaicg_pexels_size = get_post_meta($post->ID,'wpaicg_pexels_size',true);
+        $wpaicg_custom_image_settings = get_post_meta($post->ID,'wpaicg_custom_image_settings',true);
     }
 
 }
-
+$wpaicg_custom_image_settings_default = array(
+    'artist' => 'None',
+    'photography_style' => 'None',
+    'lighting' => 'Ambient',
+    'subject' => 'None',
+    'camera_settings' => 'Aperture',
+    'composition' => 'Rule of Thirds',
+    'resolution' => '4K (3840x2160)',
+    'color' => 'RGB',
+    'special_effects' => 'Cinemagraph'
+);
+$wpaicg_custom_image_settings = wp_parse_args($wpaicg_custom_image_settings,$wpaicg_custom_image_settings_default);
 ?>
 
 <table width="100%" id="wpaicg-post-form">
@@ -681,6 +694,133 @@ if ( strstr( $_SERVER['REQUEST_URI'], 'wp-admin/post-new.php' ) ) {
                 echo  ( esc_html( $_wporg_img_style ) == 'graffiti' ? ' selected' : '' ) ;
                 ?> value="graffiti">Graffiti</option>
             </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <?php
+            $wpaicg_art_file = WPAICG_PLUGIN_DIR . 'admin/data/art.json';
+
+            $wpaicg_painter_data = file_get_contents($wpaicg_art_file);
+            $wpaicg_painter_data = json_decode($wpaicg_painter_data, true);
+
+            $wpaicg_style_data = file_get_contents($wpaicg_art_file);
+            $wpaicg_style_data = json_decode($wpaicg_style_data, true);
+
+            $wpaicg_photo_file = WPAICG_PLUGIN_DIR . 'admin/data/photo.json';
+
+            $wpaicg_photo_data = file_get_contents($wpaicg_photo_file);
+            $wpaicg_photo_data = json_decode($wpaicg_photo_data, true);
+            ?>
+            <div class="wpaicg_more_image_settings" style="display: none">
+                <div class="mb-5">
+                    <label for="artist" class="wpaicg-form-label">Artist:</label>
+                    <select class="regular-text" name="wpaicg_custom_image_settings[artist]" id="artist">
+                        <?php
+                        foreach ($wpaicg_painter_data['painters'] as $key => $value) {
+                            echo '<option'.((isset($wpaicg_custom_image_settings['artist']) && $wpaicg_custom_image_settings['artist'] == $value) || (!isset($wpaicg_custom_image_settings['artist']) && $value) == 'None' ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="photography_style" class="wpaicg-form-label">Photography:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[photography_style]" id="photography_style">';
+                    foreach ($wpaicg_photo_data['photography_style'] as $key => $value) {
+                        echo '<option'.((isset($wpaicg_custom_image_settings['photography_style']) && $wpaicg_custom_image_settings['photography_style'] == $value) || (!isset($wpaicg_custom_image_settings['photography_style']) && $value == 'Landscape') ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="lighting" class="wpaicg-form-label">Lighting:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[lighting]" id="lighting">';
+                    foreach ($wpaicg_photo_data['lighting'] as $key => $value) {
+                        echo '<option'.(isset($wpaicg_custom_image_settings['lighting']) && $wpaicg_custom_image_settings['lighting'] == $value ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="subject" class="wpaicg-form-label">Subject:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[subject]" id="subject">';
+                    foreach ($wpaicg_photo_data['subject'] as $key => $value) {
+                        echo '<option'.((isset($wpaicg_custom_image_settings['subject']) && $wpaicg_custom_image_settings['subject'] == $value) || (!isset($wpaicg_custom_image_settings['subject']) && $value == 'None') ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="camera_settings" class="wpaicg-form-label">Camera:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[camera_settings]" id="camera_settings">';
+                    foreach ($wpaicg_photo_data['camera_settings'] as $key => $value) {
+                        echo '<option'.(isset($wpaicg_custom_image_settings['camera_settings']) && $wpaicg_custom_image_settings['camera_settings'] == $value ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="composition" class="wpaicg-form-label">Composition:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[composition]" id="composition">';
+                    foreach ($wpaicg_photo_data['composition'] as $key => $value) {
+                        echo '<option'.(isset($wpaicg_custom_image_settings['composition']) && $wpaicg_custom_image_settings['composition'] == $value ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="resolution" class="wpaicg-form-label">Resolution:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[resolution]" id="resolution">';
+                    foreach ($wpaicg_photo_data['resolution'] as $key => $value) {
+                        echo '<option'.(isset($wpaicg_custom_image_settings['resolution']) && $wpaicg_custom_image_settings['resolution'] == $value ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="color" class="wpaicg-form-label">Color:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[color]" id="color">';
+                    foreach ($wpaicg_photo_data['color'] as $key => $value) {
+                        echo '<option'.(isset($wpaicg_custom_image_settings['color']) && $wpaicg_custom_image_settings['color'] == $value ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+                <div class="mb-5">
+                    <?php
+                    echo '<label for="special_effects" class="wpaicg-form-label">Special Effects:</label>';
+                    echo '<select class="regular-text" name="wpaicg_custom_image_settings[special_effects]" id="special_effects">';
+                    foreach ($wpaicg_photo_data['special_effects'] as $key => $value) {
+                        echo '<option'.(isset($wpaicg_custom_image_settings['special_effects']) && $wpaicg_custom_image_settings['special_effects'] == $value ? ' selected':'').' value="' . esc_html($value) . '">' . esc_html($value) . '</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </div>
+            </div>
+            <div class="mb-5">
+                <a href="javascript:void(0)" class="wpaicg_show_image_settings">[+ More Settings]</a>
+            </div>
+            <script>
+                jQuery(document).ready(function ($){
+                    $('.wpaicg_show_image_settings').click(function (){
+                        $(this).toggleClass('wpaig_opened');
+                        $('.wpaicg_more_image_settings').slideToggle();
+                        if($(this).hasClass('wpaig_opened')){
+                            $(this).html('[- Hide Settings]');
+                        }
+                        else{
+                            $(this).html('[+ More Settings]');
+                        }
+                    })
+                })
+            </script>
         </td>
     </tr>
     <tr>

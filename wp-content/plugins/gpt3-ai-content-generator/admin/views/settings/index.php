@@ -17,8 +17,8 @@ if ( isset( $_POST['wpaicg_submit'] ) ) {
     }
 
 
-    if ( !is_numeric( $max_tokens ) || floatval( $max_tokens ) < 64 || floatval( $max_tokens ) > 4000 ) {
-        $errors = 'Please enter a valid max token value between 64 and 4000.';
+    if ( !is_numeric( $max_tokens ) || floatval( $max_tokens ) < 64 || floatval( $max_tokens ) > 8000 ) {
+        $errors = 'Please enter a valid max token value between 64 and 8000.';
         $flag = false;
     }
 
@@ -173,11 +173,28 @@ if ( isset( $_POST['wpaicg_submit'] ) ) {
             'wpaicg_woo_custom_prompt_short',
             'wpaicg_woo_custom_prompt_description',
             'wpaicg_woo_custom_prompt_keywords',
-            'wpaicg_woo_custom_prompt_meta'
+            'wpaicg_woo_custom_prompt_meta',
+            'wpaicg_custom_image_settings',
+            'wpaicg_editor_change_action',
+            'wpaicg_editor_button_menus',
         );
         foreach($wpaicg_keys as $wpaicg_key){
             if(isset($_POST[$wpaicg_key]) && !empty($_POST[$wpaicg_key])){
-                update_option($wpaicg_key, \WPAICG\wpaicg_util_core()->sanitize_text_or_array_field($_POST[$wpaicg_key]));
+                if($wpaicg_key == 'wpaicg_editor_button_menus'){
+                    $wpaicg_editor_button_menus = array();
+                    $wpaicg_list_menus = \WPAICG\wpaicg_util_core()->sanitize_text_or_array_field($_POST[$wpaicg_key]);
+                    if($wpaicg_list_menus && is_array($wpaicg_list_menus) && count($wpaicg_list_menus)){
+                        foreach($wpaicg_list_menus as $wpaicg_list_menu){
+                            if(isset($wpaicg_list_menu['name']) && isset($wpaicg_list_menu['prompt']) && $wpaicg_list_menu['name'] != '' && $wpaicg_list_menu['prompt'] != ''){
+                                $wpaicg_editor_button_menus[] = $wpaicg_list_menu;
+                            }
+                        }
+                    }
+                    update_option($wpaicg_key, $wpaicg_editor_button_menus);
+                }
+                else{
+                    update_option($wpaicg_key, \WPAICG\wpaicg_util_core()->sanitize_text_or_array_field($_POST[$wpaicg_key]));
+                }
             }
             else{
                 delete_option($wpaicg_key);
@@ -238,6 +255,7 @@ $wpaicg_custom_models = array_merge(array('text-davinci-003','text-curie-001','t
         echo  esc_url( $_SERVER['REQUEST_URI'] ) ;
         ?>" method="post">
             <ul>
+                <li><a href="#tabs-3">Welcome</a></li>
                 <li><a href="#tabs-1">AI Engine</a></li>
                 <li><a href="#tabs-2">Content</a></li>
                 <li><a href="#tabs-6">SEO</a></li>
@@ -250,23 +268,19 @@ $wpaicg_custom_models = array_merge(array('text-davinci-003','text-curie-001','t
                 ?>
                 <li><a href="#tabs-5">Image</a></li>
                 <li><a href="#tabs-8">SearchGPT</a></li>
-                <li><a href="#tabs-3">How to Use?</a></li>
+                <li><a href="#tabs-9">AI Assistant</a></li>
             </ul>
             <?php
+            include WPAICG_PLUGIN_DIR.'admin/views/settings/how-to.php';
             include WPAICG_PLUGIN_DIR.'admin/views/settings/ai.php';
             include WPAICG_PLUGIN_DIR.'admin/views/settings/content.php';
             include WPAICG_PLUGIN_DIR.'admin/views/settings/seo.php';
             include WPAICG_PLUGIN_DIR.'admin/views/settings/woocommerce.php';
             include WPAICG_PLUGIN_DIR.'admin/views/settings/image.php';
-            include WPAICG_PLUGIN_DIR.'admin/views/settings/how-to.php';
             include WPAICG_PLUGIN_DIR.'admin/views/settings/search.php';
+            include WPAICG_PLUGIN_DIR.'admin/views/settings/editor.php';
             ?>
-            <table>
-                <tr>
-                    <td><input type="submit" value="Save" name="wpaicg_submit" class="button button-primary button-large">
-                    </td>
-                </tr>
-            </table>
+            <div style="padding: 1em 1.4em;"><input type="submit" value="Save" name="wpaicg_submit" class="button button-primary button-large"></div>
         </form>
     </div>
 </div>

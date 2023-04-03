@@ -100,7 +100,7 @@ $wpaicg_all_categories = get_terms(array(
                 }
                 if(!\WPAICG\wpaicg_util_core()->wpaicg_is_pro()){
                 ?>
-                    <a href="<?php echo admin_url('admin.php?page=wpaicg-pricing')?>"><img src="<?php echo esc_html(WPAICG_PLUGIN_URL)?>admin/images/pro_img.png"></a>
+                    <a href="<?php echo esc_url(admin_url('admin.php?page=wpaicg-pricing'))?>"><img src="<?php echo esc_url(WPAICG_PLUGIN_URL)?>admin/images/pro_img.png"></a>
                 <?php
                 }
                 ?>
@@ -176,7 +176,7 @@ $wpaicg_all_categories = get_terms(array(
                     success: function (res){
                         wpaicg_button.removeAttr('disabled');
                         if(res.status === 'success'){
-                            window.location.href = '<?php echo admin_url('admin.php?page=wpaicg_bulk_content')?>&wpaicg_track='+res.id
+                            window.location.href = '<?php echo esc_url(admin_url('admin.php?page=wpaicg_bulk_content'))?>&wpaicg_track='+res.id
                         }
                         else{
                             alert('Something went wrong');

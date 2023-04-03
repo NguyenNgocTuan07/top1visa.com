@@ -1,6 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 if(isset($_POST['save_bulk_setting'])) {
+    // Verify nonce
+    if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'save_bulk_setting_nonce')) {
+        die('Invalid nonce.');
+    }
     if (isset($_POST['wpaicg_restart_queue']) && !empty($_POST['wpaicg_restart_queue'])) {
         update_option('wpaicg_restart_queue', sanitize_text_field($_POST['wpaicg_restart_queue']));
     } else {
@@ -16,6 +20,7 @@ $wpaicg_restart_queue = get_option('wpaicg_restart_queue', '');
 $wpaicg_try_queue = get_option('wpaicg_try_queue', '');
 ?>
 <form action="" method="post">
+    <?php wp_nonce_field('save_bulk_setting_nonce'); ?>
     <table class="form-table">
         <tr>
             <th scope="row">Restart Failed Jobs After</th>

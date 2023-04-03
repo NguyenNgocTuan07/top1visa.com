@@ -32,6 +32,9 @@ class Wp_Ai_Content_Generator_Deactivator {
 
 	public static function deactivate() {
 		wp_clear_scheduled_hook( 'wpaicg_remove_chat_tokens_limited' );
+		wp_clear_scheduled_hook( 'wpaicg_remove_promptbase_tokens_limited' );
+		wp_clear_scheduled_hook( 'wpaicg_remove_image_tokens_limited' );
+		wp_clear_scheduled_hook( 'wpaicg_remove_forms_tokens_limited' );
 	}
 }
 

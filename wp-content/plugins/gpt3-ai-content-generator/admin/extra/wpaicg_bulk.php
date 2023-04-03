@@ -19,6 +19,16 @@ $wpaicg_cron_added = get_option('_wpaicg_cron_added','');
         <a href="<?php echo admin_url('admin.php?page=wpaicg_bulk_content')?>" class="nav-tab<?php echo !$wpaicg_track && !$wpaicg_bulk_action ? ' nav-tab-active' : ''?>">Bulk Editor</a>
         <a href="<?php echo admin_url('admin.php?page=wpaicg_bulk_content&wpaicg_action=csv')?>" class="nav-tab<?php echo $wpaicg_bulk_action == 'csv' ? ' nav-tab-active' : ''?>">CSV</a>
         <a href="<?php echo admin_url('admin.php?page=wpaicg_bulk_content&wpaicg_action=copy-paste')?>" class="nav-tab<?php echo $wpaicg_bulk_action == 'copy-paste' ? ' nav-tab-active' : ''?>">Copy & Paste</a>
+        <a href="<?php echo admin_url('admin.php?page=wpaicg_bulk_content&wpaicg_action=rss')?>" class="nav-tab<?php echo $wpaicg_bulk_action == 'rss' ? ' nav-tab-active' : ''?>">
+            RSS
+            <?php
+            if(!\WPAICG\wpaicg_util_core()->wpaicg_is_pro()):
+            ?>
+            <span style="color: #000;padding: 2px 5px;font-size: 12px;background:#ffba00;border-radius: 2px;">Pro</span>
+            <?php
+            endif;
+            ?>
+        </a>
         <a href="<?php echo admin_url('admin.php?page=wpaicg_bulk_content&wpaicg_action=tracking')?>" class="nav-tab<?php echo $wpaicg_track || $wpaicg_bulk_action == 'tracking' ? ' nav-tab-active' : ''?>">Queue</a>
         <a href="<?php echo admin_url('admin.php?page=wpaicg_bulk_content&wpaicg_action=setting')?>" class="nav-tab<?php echo $wpaicg_bulk_action == 'setting' ? ' nav-tab-active' : ''?>">Settings</a>
     </h2>
@@ -34,6 +44,8 @@ $wpaicg_cron_added = get_option('_wpaicg_cron_added','');
             include __DIR__.'/wpaicg_bulk_copy_paste.php';
         elseif($wpaicg_bulk_action == 'setting'):
             include __DIR__.'/wpaicg_bulk_setting.php';
+        elseif($wpaicg_bulk_action == 'rss'):
+            include __DIR__.'/wpaicg_rss.php';
         elseif($wpaicg_track):
             include __DIR__.'/wpaicg_bulk_tracking.php';
         endif;

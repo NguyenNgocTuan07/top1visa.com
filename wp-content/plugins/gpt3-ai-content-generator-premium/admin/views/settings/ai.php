@@ -95,6 +95,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         ?>" >
         <a class="wpcgai_help_link" href="https://gptaipower.com/bring-your-own-key-model/" target="_blank">?</a>
         <a class="wpcgai_help_link" href="https://beta.openai.com/account/api-keys" target="_blank">Get Your Api Key</a>
+        <p>Please note that our plugin works with the OpenAI API. To use it, you need to create an account on OpenAI and <a href="https://beta.openai.com/account/api-keys" target="_blank">obtain your API key</a>. OpenAI provides $5 in free credit for new users. If you encounter the message <b>"You exceeded your current quota, please check your plan and billing details."</b> it indicates that you have exhausted your OpenAI quota and need to purchase additional credit from OpenAI.</p>
+        <p>Purchasing our plugin does not provide any credit from OpenAI. When you buy our plugin, you gain access to the pro features of the plugin, but it does not include any API credit. You will still need to purchase credit from OpenAI separately.</p>
     </div>
 </div>
 <script>

@@ -180,6 +180,11 @@ if ( !class_exists( '\\WPAICG\\WPAICG_Content' ) ) {
 
         public function wpaicg_bulk_cancel()
         {
+            // Check nonce
+            if (!isset($_POST['wpaicg_nonce']) || !wp_verify_nonce($_POST['wpaicg_nonce'], 'wpaicg_nonce_action')) {
+                wp_send_json_error('Invalid nonce');
+                exit;
+            }
             $wpaicg_result = array(
                 'status' => 'error',
                 'msg'    => 'Something went wrong',
@@ -374,6 +379,11 @@ if ( !class_exists( '\\WPAICG\\WPAICG_Content' ) ) {
 
         public function wpaicg_bulk_status()
         {
+            // verify nonce
+            if (!isset($_POST['wpaicg_nonce']) || !wp_verify_nonce($_POST['wpaicg_nonce'], 'wpaicg_nonce_action')) {
+                wp_send_json_error('Invalid nonce');
+                exit;
+            }
             $wpaicg_result = array(
                 'status' => 'error',
                 'msg'    => 'Something went wrong',
@@ -873,6 +883,9 @@ if ( !class_exists( '\\WPAICG\\WPAICG_Content' ) ) {
                     }
                     if ( array_key_exists( 'wpaicg_seo_meta_desc', $_POST ) ) {
                         update_post_meta( $wpaicg_post_id, '_wpaicg_seo_meta_desc', 1 );
+                    }
+                    if ( array_key_exists( 'wpaicg_custom_image_settings', $_POST ) ) {
+                        update_post_meta( $wpaicg_post_id, 'wpaicg_custom_image_settings', wpaicg_util_core()->sanitize_text_or_array_field($_POST['wpaicg_custom_image_settings']) );
                     }
                     if ( array_key_exists( 'wpaicg_post_tags', $_POST ) ) {
                         update_post_meta( $wpaicg_post_id, '_wpaicg_post_tags', sanitize_text_field($_POST['wpaicg_post_tags']) );
