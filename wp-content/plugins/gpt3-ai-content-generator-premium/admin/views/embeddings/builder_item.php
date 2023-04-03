@@ -46,14 +46,14 @@ $wpaicg_error_msg = get_post_meta($wpaicg_embedding->ID,'wpaicg_error_msg',true)
     <td>
         <?php
         if(!empty($wpaicg_start)){
-            echo date('d.m.Y H:i',esc_html($wpaicg_start));
+            echo esc_html(date('d.m.Y H:i',$wpaicg_start));
         }
         ?>
     </td>
     <td>
         <?php
         if(!empty($wpaicg_completed)){
-            echo date('d.m.Y H:i',esc_html($wpaicg_completed));
+            echo esc_html(date('d.m.Y H:i',$wpaicg_completed));
         }
         ?>
     </td>

@@ -239,7 +239,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Image')) {
             $open_ai = WPAICG_OpenAI::get_instance()->openai();
             $wpaicg_nonce = sanitize_text_field($_REQUEST['_wpnonce']);
             if ( !wp_verify_nonce( $wpaicg_nonce, 'wpaicg-image-generator' ) ) {
-                $wpaicg_result['msg'] = 'Invalid nonce. This means we are unable to verify the validity of the nonce. This issue may be caused by a caching plugin. Please clear your cache and try again.';
+                $wpaicg_result['msg'] = 'Invalid nonce. This means we are unable to verify the validity of the nonce. There are couple of possible reasons for this. 1. A cache plugin is caching the nonce. 2. The nonce has expired. 3. Invalid SSL certificate. 4. Network issue. Please check and try again.';
             }
             else {
                 if (!$open_ai) {
@@ -330,7 +330,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Image')) {
             $wpaicg_result = array('status' => 'error', 'msg' => 'Something went wrong');
             $wpaicg_nonce = sanitize_text_field($_REQUEST['_wpnonce']);
             if ( !wp_verify_nonce( $wpaicg_nonce, 'wpaicg-image-generator' ) ) {
-                $wpaicg_result['msg'] = 'Invalid nonce. This means we are unable to verify the validity of the nonce. This issue may be caused by a caching plugin. Please clear your cache and try again.';
+                $wpaicg_result['msg'] = 'Invalid nonce. This means we are unable to verify the validity of the nonce. There are couple of possible reasons for this. 1. A cache plugin is caching the nonce. 2. The nonce has expired. 3. Invalid SSL certificate. 4. Network issue. Please check and try again.';
             }
             else {
                 $wpaicg_sd_api_key = get_option('wpaicg_sd_api_key', '');

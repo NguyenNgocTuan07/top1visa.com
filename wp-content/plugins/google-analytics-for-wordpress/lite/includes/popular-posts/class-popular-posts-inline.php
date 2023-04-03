@@ -75,11 +75,11 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 		}
 
 		// Wrap in a P tag to keep the same spacing.
-		$html = '<div class="' . esc_attr($this->get_wrapper_class( $atts )) . '" ' . $this->get_element_style( $theme, 'background', $atts ) . '>';
+		$html = '<div class="' . esc_attr($this->get_wrapper_class( $atts )) . '" ' . esc_attr($this->get_element_style( $theme, 'background', $atts )) . '>';
 
 		if ( ! empty( $theme_styles['image'] ) && ! empty( $posts[0]['image'] ) ) {
 			$html .= '<div class="monsterinsights-inline-popular-posts-image">';
-			$html .= '<img src="' . $posts[0]['image'] . '" srcset=" ' . $posts[0]['srcset'] . ' " alt="' . esc_attr( $posts[0]['title'] ) . '" />';
+			$html .= '<img src="' . esc_url($posts[0]['image']) . '" srcset=" ' . esc_attr($posts[0]['srcset']) . ' " alt="' . esc_attr( $posts[0]['title'] ) . '" />';
 			$html .= '</div>';
 		}
 		$html .= '<div class="monsterinsights-inline-popular-posts-text">';
@@ -90,10 +90,10 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 			$html .= '<span class="monsterinsights-inline-popular-posts-label" ' . esc_attr($this->get_element_style( $theme, 'label', $atts )) . '>' . esc_html($label_text) . '</span>';
 		}
 		if ( ! empty( $theme_styles['styles']['border'] ) ) {
-			$html .= '<span class="monsterinsights-inline-popular-posts-border" ' . $this->get_element_style( $theme, 'border', $atts, 'color' ) . '></span>';
+			$html .= '<span class="monsterinsights-inline-popular-posts-border" ' . esc_attr($this->get_element_style( $theme, 'border', $atts, 'color' )) . '></span>';
 		}
 		if ( ! empty( $theme_styles['styles']['border']['color2'] ) ) {
-			$html .= '<span class="monsterinsights-inline-popular-posts-border-2" ' . $this->get_element_style( $theme, 'border', $atts, 'color2' ) . '></span>';
+			$html .= '<span class="monsterinsights-inline-popular-posts-border-2" ' . esc_attr($this->get_element_style( $theme, 'border', $atts, 'color2' )) . '></span>';
 		}
 
 		$display_count = 0;
@@ -104,7 +104,7 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 			}
 			$this->set_post_shown( $post['id'] );
 			$html .= '<div class="monsterinsights-inline-popular-posts-post">';
-			$html .= '<a class="monsterinsights-inline-popular-posts-title" ' . $this->get_element_style( $theme, 'title', $atts ) . ' href="' . $post['link'] . '">' . $post['title'] . '</a>';
+			$html .= '<a class="monsterinsights-inline-popular-posts-title" ' . esc_attr($this->get_element_style( $theme, 'title', $atts )) . ' href="' . esc_url($post['link']) . '">' . esc_html($post['title']) . '</a>';
 			$html .= '</div>';
 		}
 
@@ -130,10 +130,10 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 				$styles .= '.monsterinsights-inline-popular-posts.monsterinsights-popular-posts-styled.monsterinsights-inline-popular-posts-' . $theme_key . ' {';
 
 				if ( ! empty( $theme_styles['background']['color'] ) ) {
-					$styles .= 'background-color:' . $theme_styles['background']['color'] . ';';
+					$styles .= 'background-color:' . esc_attr($theme_styles['background']['color']) . ';';
 				}
 				if ( ! empty( $theme_styles['background']['border'] ) ) {
-					$styles .= 'border-color:' . $theme_styles['background']['border'] . ';';
+					$styles .= 'border-color:' . esc_attr($theme_styles['background']['border']) . ';';
 				}
 
 				$styles .= '}';
@@ -143,11 +143,11 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 				$styles .= '.monsterinsights-inline-popular-posts.monsterinsights-popular-posts-styled.monsterinsights-inline-popular-posts-' . $theme_key . ' .monsterinsights-inline-popular-posts-label {';
 
 				if ( ! empty( $theme_styles['label']['color'] ) ) {
-					$styles .= 'color:' . $theme_styles['label']['color'] . ';';
+					$styles .= 'color:' . esc_attr($theme_styles['label']['color']) . ';';
 				}
 
 				if ( ! empty( $theme_styles['label']['background'] ) ) {
-					$styles .= 'background-color:' . $theme_styles['label']['background'] . ';';
+					$styles .= 'background-color:' . esc_attr($theme_styles['label']['background']) . ';';
 				}
 
 				$styles .= '}';
@@ -157,10 +157,10 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 				$styles .= '.monsterinsights-inline-popular-posts.monsterinsights-popular-posts-styled.monsterinsights-inline-popular-posts-' . $theme_key . ' .monsterinsights-inline-popular-posts-title {';
 
 				if ( ! empty( $theme_styles['title']['color'] ) ) {
-					$styles .= 'color:' . $theme_styles['title']['color'] . ';';
+					$styles .= 'color:' . esc_attr($theme_styles['title']['color']) . ';';
 				}
 				if ( ! empty( $theme_styles['title']['size'] ) ) {
-					$styles .= 'font-size:' . $theme_styles['title']['size'] . 'px;';
+					$styles .= 'font-size:' . esc_attr($theme_styles['title']['size']) . 'px;';
 				}
 
 				$styles .= '}';
@@ -170,7 +170,7 @@ class MonsterInsights_Popular_Posts_Inline extends MonsterInsights_Popular_Posts
 				$styles .= '.monsterinsights-inline-popular-posts.monsterinsights-popular-posts-styled.monsterinsights-inline-popular-posts-' . $theme_key . ' .monsterinsights-inline-popular-posts-border {';
 
 				if ( ! empty( $theme_styles['border']['color'] ) ) {
-					$styles .= 'border-color:' . $theme_styles['border']['color'] . ';';
+					$styles .= 'border-color:' . esc_attr($theme_styles['border']['color']) . ';';
 				}
 
 				$styles .= '}';

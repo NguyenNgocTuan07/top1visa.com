@@ -33,6 +33,7 @@ if(!empty($wpaicg_cron_job_last_time)){
             You must configure a <a href="https://www.hostgator.com/help/article/what-are-cron-jobs" target="_blank">Cron Job</a> on your hosting/server.
             If this is not done, the Index Builder feature will not be available for use.
         </p>
+        <p>You can also index your posts manually by clicking the "Instant Embedding" button on the Posts/Pages/Products page.</p>
     <?php
     endif;
     ?>
@@ -60,7 +61,7 @@ if(!empty($wpaicg_cron_job_last_time)){
             $wpaicg_output = $wpaicg_time_diff;
         }
         ?>
-        <p>The last time, the Cron Job ran on your website <?php echo date('Y-m-d H:i:s',$wpaicg_cron_job_last_time)?> (<?php echo esc_html($wpaicg_output)?> ago)</p>
+        <p>The last time, the Cron Job ran on your website <?php echo esc_html(date('Y-m-d H:i:s',$wpaicg_cron_job_last_time))?> (<?php echo esc_html($wpaicg_output)?> ago)</p>
     <?php
     endif;
     ?>
@@ -68,6 +69,10 @@ if(!empty($wpaicg_cron_job_last_time)){
     <p></p>
     <p><strong>Cron Job Configuration</strong></p>
     <p></p>
-    <p>If you are using Linux/Unix server, copy below code and paste it into crontab. Read detailed guide <a href="https://gptaipower.com/how-to-add-cron-job/" target="_blank">here</a>.</p>
+    <p>If you are using Linux/Unix server, copy below code and paste it into crontab. Read detailed guide <a href="<?php echo esc_url("https://gptaipower.com/how-to-add-cron-job/"); ?>" target="_blank">here</a>.</p>
     <p><code>* * * * * php <?php echo esc_html(ABSPATH)?>index.php -- wpaicg_builder=yes</code></p>
+    <p></p>
+    <hr>
+    <p><strong>Instant Embedding</strong></p>
+    <p>You can also index your posts manually by clicking the "Instant Embedding" button on the Posts/Pages/Products page.</p>
 </div>

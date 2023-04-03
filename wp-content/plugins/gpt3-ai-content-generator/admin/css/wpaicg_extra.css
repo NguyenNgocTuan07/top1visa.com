@@ -565,3 +565,38 @@ div.wpcgai_lds-ellipsis{
         grid-column: span 1/span 1;
     }
 }
+.wpaicg_editor_icon button{
+    background-image: url("../../public/images/logo.png");
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.wpaicg-editor-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0,0,0,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: wpaicg-editor-spin 1s ease-in-out infinite;
+    -webkit-animation: wpaicg-editor-spin 1s ease-in-out infinite;
+}
+
+@keyframes wpaicg-editor-spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes wpaicg-editor-spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+.wpaicg_editor_working{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgb(0 0 0 / 20%);
+    top: 0;
+    direction: ltr;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}

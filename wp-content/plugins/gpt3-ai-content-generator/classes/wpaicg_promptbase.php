@@ -196,7 +196,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Promptbase')) {
                         'post_status' => 'publish'
                     ));
                 }
-                $prompt_fields = array('prompt','response','category','engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','color','icon','editor','bgcolor','header','dans','ddraft','dclear','dnotice');
+                $prompt_fields = array('prompt','response','category','engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','color','icon','editor','bgcolor','header','dans','ddraft','dclear','dnotice','generate_text','noanswer_text','draft_text','clear_text','stop_text','cnotice_text');
                 foreach($prompt_fields as $prompt_field){
                     if(isset($_POST[$prompt_field]) && !empty($_POST[$prompt_field])){
                         $value = wpaicg_util_core()->sanitize_text_or_array_field($_POST[$prompt_field]);

@@ -1,14 +1,14 @@
 ===GPT AI Power: Complete AI Pack===
 Contributors: senols
-Tags: chatgpt, gpt, openai, ai, chatbot, content writer, speech, whisper, image generator, ai training
+Tags: chatgpt, gpt, openai, ai, ai assistant, chatbot, speech, whisper, image generator, ai training
 Requires at least: 5.0.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 1.6.6
+Stable tag: 1.6.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
-ChatGPT, Content Writer, Auto Content Writer, Chatbot, Image Generator, WooCommerce Product Writer, Audio Converter, Speech-to-Post, SEO optimizer, AI Training, Embeddings, Title Suggestions, FAQ/Knowledgebase builder and hundreds of ready to use prompts and forms.
+ChatGPT, Content Writer, Auto Content Writer, Chatbot, Image Generator, AI Assistant, WooCommerce Product Writer, Audio Converter, Speech-to-Post, SEO optimizer, AI Training, Embeddings, Title Suggestions, FAQ/Knowledgebase builder and hundreds of ready to use prompts and forms.
  
 == Description ==
 
@@ -22,6 +22,7 @@ Please read documentation here: <a href="https://gptaipower.com/">https://gptaip
 * Image Generator (DALL-E and Stable Diffusion 🚀🚀🚀)
 * ChatGPT - Fully customizable chat widget and chat bot with Chat logs and long term external memory.
 * WooCommerce Product Writer
+* AI Assistant (Integrated with Gutenberg and Classic Editor)
 * AI Training
 * Fine-Tuner
 * Dataset Converter
@@ -43,7 +44,7 @@ Please read documentation here: <a href="https://gptaipower.com/">https://gptaip
  
 https://www.youtube.com/watch?v=lmT_ctVA8iI
 
-GPT AI Power is a comprehensive WordPress plugin that leverages the power of OpenAI's GPT-3 language model to generate high-quality content, images, and forms for your website. 
+GPT AI Power is a comprehensive WordPress plugin that leverages the power of OpenAI's GPT language model to generate high-quality content, images, and forms for your website. 
 
 It features a Content Writer, Auto Content Writer, Image Generator (DALL-E and Stable Diffusion), WooCommerce Product Writer, Audio Converter, hundreds of ready to use prompts and forms and AI Training capabilities. 
 
@@ -87,7 +88,6 @@ https://www.youtube.com/watch?v=hetYOlR-ms4
 * Add customizable heading tags (h1, h2, h3, h4, h5, h6) to your content.
 * Add customizable hyperlink and anchor text to your content.
 * Easily manage and update your OpenAI API key from within the plugin's settings page.
-* Save as a draft
 * Track logs
 * Edit, delete, sort or add new headings before generating content.
 * Add Call to Action to your content.
@@ -192,7 +192,7 @@ https://www.youtube.com/watch?v=hetYOlR-ms4
 GPT AI Power is a complete AI package for WordPress that generates high-quality content, images, and forms using OpenAI's GPT-3 technology.
 
 = What are the core features of GPT AI Power? =
-The core features include a Content Writer, Auto Content Writer, Bulk Content Writer, Image Generator, ChatGPT, WooCommerce Product Writer, AI Training, Fine-Tuner, Dataset Converter, PromptBase, GPT Forms and SEO Optimizer with support for 38 languages.  
+The core features include a Content Writer, Auto Content Writer, Image Generator, ChatGPT, WooCommerce Product Writer, AI Training, Fine-Tuner, Dataset Converter, PromptBase, GPT Forms and SEO Optimizer with support for 38 languages.  
 
 = Can I customize the generated content? =
 Yes, you can customize the generated content with options for writing style, tone, temperature, maximum tokens, and more.
@@ -217,6 +217,93 @@ The PHP max execution time setting determines the maximum amount of time a PHP s
 This message is coming from OpenAI, not from our plugin. It means that you have reached the limit of your OpenAI API quota, which is determined by your plan and billing details. Our plugin works on a "bring your own API key" model, serving as a bridge between WordPress and OpenAI, so the issue is not related to the plugin itself. To resolve this issue, you'll need to check your OpenAI account and ensure that you have enough quota for your needs, or upgrade your plan if necessary.
 
 == Changelog ==
+
+= 1.6.22 =
+Improvement: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following module: ai forms.
+Security: Nonce verification added for ai forms - settings.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
+
+= 1.6.21 =
+Improvement: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following module: auto content writer, chat logs and ai forms.
+Security: Nonce verification added for auto content writer, chat logs and ai forms.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
+
+= 1.6.20 =
+Improvement: Customize all buttons in AI Forms by visiting your form and accessing the Front-end tab. Rename buttons as desired. You can personalize the notification text too.
+Improvement: Customize all buttons in Image Generator by navigating to Image Generator - Settings and renaming buttons according to your preferences.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: I just started using Twitter. Connect with me at [Twitter](https://twitter.com/sengpt).
+
+= 1.6.19 =
+Improvement: Added more built-in prompts for AI Assistant.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= 1.6.18 =
+[New Feature]: Introducing AI Assistant! Compatible with Gutenberg, Classic Editor, and WooCommerce. To access it, simply navigate to your Editor and locate our symbol in the menu. Choose from various tools and customize your prompts by visiting Settings - Assistant.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= 1.6.17 =
+[New Feature]: Introducing AI Assistant! Compatible with Gutenberg, Classic Editor, and WooCommerce. To access it, simply navigate to your Editor and locate our symbol in the menu. Choose from various tools and customize your prompts by visiting Settings - Assistant.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= 1.6.16 =
+Improvement: Enhanced image settings. You can now achieve significantly better quality Dall-E images. Navigate to Settings > Image tab and click on More Settings. From there, you can adjust parameters such as photography, camera, lighting, composition, resolution and color. Experiment with these values until you discover the optimal settings for your images.
+Fix: Fixed single and multiline parsing issues in Playground.
+Tweak: Updated the menu icon for the plugin.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= 1.6.15 =
+
+[Improvement]: Added Elementor support for Embeddings. If you have pages designed with Elementor, consider reindexing them.
+[New Feature - Pro Only]: Embeddings now supports Custom Post Types.
+[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= 1.6.14 =
+[New Feature - Pro Only]: Pro plan users now can generate content from RSS.
+[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= 1.6.13 =
+
+[Fix]: wp_clear_scheduled_hook has now been added to the deactivator, ensuring cron events are cleaned up if the plugin gets deactivated.
+[Tweak]: Added more built-in prompts to Playground. Made some CSS adjustments. Limited the number of answers to one.
+[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+
+= 1.6.12 =
+
+[Fix]: Fixed an issue where welcome message was not saving when creating a new widget.
+[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+
+= Version 1.6.11 =
+
+[Improvement]: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following module: auto content writer.
+[Security]: Nonce verification added for queue deletion, bulk settings and bulk tracking.
+[Security]: Escaped some variables in bulk tracking.
+[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= Version 1.6.10 =
+
+[Improvement]: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following modules: fine-tune, auto content writer, embeddings and chat log.
+[Fix]: Bug fix in the Freemius library used to communicate with the API throwing fatal error.
+[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+
+= Version 1.6.9 =
+
+[Improvement]: Implemented $wpdb->prepare in bulk queue.
+[Tweak]: Modified pre-defined header tag from h1 to h2 in Custom Mode.
+
+= Version 1.6.8 =
+[Fix]: Fixed chmod permissions for auto content writer and index builder.
+[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
+
+= Version 1.6.7 =
+[Improvement]: Added Categories and some sample prompts under Playground.
+[Improvement]: Added more precise error messages for issues related to invalid nonces.
+[Improvement]: Added Instant Embedding notice under Index Builder.
+[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
 
 = Version 1.6.6 =
 

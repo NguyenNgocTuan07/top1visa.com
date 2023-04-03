@@ -12,7 +12,7 @@ if($wpaicg_max_execution < 1000){
 }
 ?>
 <?php
-if(isset($_POST['wpaicg_delete_running'])){
+if (isset($_POST['wpaicg_delete_running']) && check_admin_referer('wpaicg_delete_running_action', 'wpaicg_delete_running_nonce')) {
     update_option('_wpaicg_crojob_bulk_last_time', time());
     @unlink(WPAICG_PLUGIN_DIR.'wpaicg_running.txt');
     echo '<script>window.location.reload()</script>';
@@ -24,9 +24,10 @@ if(!empty($wpaicg_cron_job_last_time)){
         ?>
         <div class="wpaicg-alert">
             <p style="color: #f00">
-                You can use below button to restart your queue if it is stuck.
+            You can use the button below to restart your queue if it is stuck.
             </p>
             <form action="" method="post">
+                <?php wp_nonce_field('wpaicg_delete_running_action', 'wpaicg_delete_running_nonce'); ?>
                 <button name="wpaicg_delete_running" class="button button-primary">Force Refresh</button>
             </form>
         </div>
@@ -34,18 +35,6 @@ if(!empty($wpaicg_cron_job_last_time)){
     }
 }
 ?>
-<style>
-.wpaicg_notice_text_be {
-    padding: 10px;
-    background-color: #F8DC6F;
-    text-align: left;
-    margin-bottom: 12px;
-    color: #000;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-</style>
-<p class="wpaicg_notice_text_be">If you are happy with our plugin, please consider writing a review <a href="https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post" target="_blank">here</a>. Post your questions and suggestions on our <a href="https://wordpress.org/support/plugin/gpt3-ai-content-generator/" target="_blank">support forum</a>. Thank you! ❤️ 😊</p>
-
 <div class="wpaicg-alert">
     <?php
     if(empty($wpaicg_cron_added)):
@@ -82,7 +71,7 @@ if(!empty($wpaicg_cron_job_last_time)){
             $wpaicg_output = $wpaicg_time_diff;
         }
         ?>
-        <p>The last time, the Cron Job ran on your website <?php echo date('Y-m-d H:i:s',$wpaicg_cron_job_last_time)?> (<?php echo esc_html($wpaicg_output)?> ago)</p>
+        <p>The last time, the Cron Job ran on your website <?php echo esc_html(date('Y-m-d H:i:s',$wpaicg_cron_job_last_time))?> (<?php echo esc_html($wpaicg_output)?> ago)</p>
     <?php
     endif;
     ?>
@@ -93,7 +82,7 @@ if(!empty($wpaicg_cron_job_last_time)){
     <p></p>
     <p><strong>Cron Job Configuration</strong></p>
     <p></p>
-    <p>If you are using Linux/Unix server, copy below code and paste it into crontab. Read detailed guide <a href="https://gptaipower.com/how-to-add-cron-job/" target="_blank">here</a>.</p>
+    <p>If you are using a Linux/Unix server, copy the code below and paste it into the crontab. Read the detailed guide <a href="<?php echo esc_url("https://gptaipower.com/how-to-add-cron-job/"); ?>" target="_blank">here</a>.</p>
     <p><code>* * * * * php <?php echo esc_html(ABSPATH)?>index.php -- wpaicg_cron=yes</code></p>
     <?php
 //    endif;

@@ -42,7 +42,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Cron')) {
                     fclose($wpaicg_file);
                     try {
                         $_SERVER["REQUEST_METHOD"] = 'GET';
-                        chmod($wpaicg_running,0777);
+                        chmod($wpaicg_running,0755);
                         $wpaicg_generator_content = WPAICG_Content::get_instance();
                         $wpaicg_generator_content->wpaicg_bulk_generator();
                     }

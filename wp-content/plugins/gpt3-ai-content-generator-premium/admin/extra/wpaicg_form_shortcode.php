@@ -54,7 +54,7 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
     }
     if($wpaicg_custom){
         $sql = "SELECT p.ID as id,p.post_title as title, p.post_content as description";
-        $wpaicg_meta_keys = array('prompt','editor','fields','response','category','engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','color','icon','bgcolor','header','dans','ddraft','dclear','dnotice');
+        $wpaicg_meta_keys = array('prompt','editor','fields','response','category','engine','max_tokens','temperature','top_p','best_of','frequency_penalty','presence_penalty','stop','color','icon','bgcolor','header','dans','ddraft','dclear','dnotice','generate_text','noanswer_text','draft_text','clear_text','stop_text','cnotice_text');
         foreach($wpaicg_meta_keys as $wpaicg_meta_key){
             $sql .= ",(SELECT ".$wpaicg_meta_key.".meta_value FROM ".$wpdb->postmeta." ".$wpaicg_meta_key." WHERE ".$wpaicg_meta_key.".meta_key='wpaicg_form_".$wpaicg_meta_key."' AND p.ID=".$wpaicg_meta_key.".post_id LIMIT 1) as ".$wpaicg_meta_key;
         }
@@ -83,6 +83,12 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
         $wpaicg_frequency_penalty = isset($wpaicg_item['frequency_penalty']) && !empty($wpaicg_item['frequency_penalty']) ? $wpaicg_item['frequency_penalty'] : $this->wpaicg_frequency_penalty;
         $wpaicg_presence_penalty = isset($wpaicg_item['presence_penalty']) && !empty($wpaicg_item['presence_penalty']) ? $wpaicg_item['presence_penalty'] : $this->wpaicg_presence_penalty;
         $wpaicg_stop = isset($wpaicg_item['stop']) && !empty($wpaicg_item['stop']) ? $wpaicg_item['stop'] : $this->wpaicg_stop;
+        $wpaicg_generate_text = isset($wpaicg_item['generate_text']) && !empty($wpaicg_item['generate_text']) ? $wpaicg_item['generate_text'] : 'Generate';
+        $wpaicg_draft_text = isset($wpaicg_item['draft_text']) && !empty($wpaicg_item['draft_text']) ? $wpaicg_item['draft_text'] : 'Save Draft';
+        $wpaicg_noanswer_text = isset($wpaicg_item['noanswer_text']) && !empty($wpaicg_item['noanswer_text']) ? $wpaicg_item['noanswer_text'] : 'Number of Answers';
+        $wpaicg_clear_text = isset($wpaicg_item['clear_text']) && !empty($wpaicg_item['clear_text']) ? $wpaicg_item['clear_text'] : 'Clear';
+        $wpaicg_stop_text = isset($wpaicg_item['stop_text']) && !empty($wpaicg_item['stop_text']) ? $wpaicg_item['stop_text'] : 'Stop';
+        $wpaicg_cnotice_text = isset($wpaicg_item['cnotice_text']) && !empty($wpaicg_item['cnotice_text']) ? $wpaicg_item['cnotice_text'] : 'Please register to save your result';
         $wpaicg_stop_lists = '';
         if(is_array($wpaicg_stop) && count($wpaicg_stop)){
             foreach($wpaicg_stop as $item_stop){
@@ -420,7 +426,7 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
                                 ?>
                                 <div class="wpaicg-prompt-flex-center">
                                     <div style="<?php echo isset($wpaicg_item['dans']) && $wpaicg_item['dans'] == 'no' ? 'display:none':''?>">
-                                        <strong>Number of Answers</strong>
+                                        <strong><?php echo esc_html($wpaicg_noanswer_text);?></strong>
                                         <select class="wpaicg-prompt-max-lines" id="wpaicg-prompt-max-lines">
                                             <?php
                                             for($i=1;$i<=10;$i++){
@@ -429,8 +435,8 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
                                             ?>
                                         </select>
                                     </div>
-                                    <button style="<?php echo isset($wpaicg_item['dans']) && $wpaicg_item['dans'] == 'no' ? 'margin-left:0':''?>" class="wpaicg-button wpaicg-generate-button" id="wpaicg-generate-button">Generate</button>
-                                    &nbsp;<button type="button" class="wpaicg-button wpaicg-prompt-stop-generate" id="wpaicg-prompt-stop-generate" style="display: none">Stop</button>
+                                    <button style="<?php echo isset($wpaicg_item['dans']) && $wpaicg_item['dans'] == 'no' ? 'margin-left:0':''?>" class="wpaicg-button wpaicg-generate-button" id="wpaicg-generate-button"><?php echo esc_html($wpaicg_generate_text);?></button>
+                                    &nbsp;<button type="button" class="wpaicg-button wpaicg-prompt-stop-generate" id="wpaicg-prompt-stop-generate" style="display: none"><?php echo esc_html($wpaicg_stop_text);?></button>
                                 </div>
                             </div>
                             <div class="mb-5">
@@ -446,7 +452,7 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
                                         if(isset($wpaicg_item['dnotice']) && $wpaicg_item['dnotice'] == 'no'):
                                         else:
                                             ?>
-                                        <a style="font-size: 13px;" href="<?php echo site_url('wp-login.php?action=register')?>">Please register to save your result</a>
+                                        <a style="font-size: 13px;" href="<?php echo site_url('wp-login.php?action=register')?>"><?php echo esc_html($wpaicg_cnotice_text)?></a>
                                         <?php
                                         endif;
                                         ?>
@@ -460,7 +466,7 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
                                         }
                                         else{
                                             ?>
-                                            <a style="font-size: 13px;" href="<?php echo site_url('wp-login.php?action=register')?>">Please register to save your result</a>
+                                            <a style="font-size: 13px;" href="<?php echo site_url('wp-login.php?action=register')?>"><?php echo esc_html($wpaicg_cnotice_text)?></a>
                                             <?php
                                         }
                                     }
@@ -473,14 +479,14 @@ if(isset($atts) && is_array($atts) && isset($atts['id']) && !empty($atts['id']))
                                 if(isset($wpaicg_item['ddraft']) && $wpaicg_item['ddraft'] == 'no'):
                                 else:
                                 ?>
-                                <button type="button" class="wpaicg-button wpaicg-prompt-save-draft" id="wpaicg-prompt-save-draft">Save Draft</button>
+                                <button type="button" class="wpaicg-button wpaicg-prompt-save-draft" id="wpaicg-prompt-save-draft"><?php echo esc_html($wpaicg_draft_text);?></button>
                                 <?php
                                     endif;
                                 endif;
                                 if(isset($wpaicg_item['dclear']) && $wpaicg_item['dclear'] == 'no'):
                                 else:
                                 ?>
-                                <button type="button" class="wpaicg-button wpaicg-prompt-clear" id="wpaicg-prompt-clear">Clear</button>
+                                <button type="button" class="wpaicg-button wpaicg-prompt-clear" id="wpaicg-prompt-clear"><?php echo esc_html($wpaicg_clear_text);?></button>
                                 <?php
                                 endif;
                                 ?>

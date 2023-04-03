@@ -18,11 +18,14 @@ if($wpaicg_builder_types && is_array($wpaicg_builder_types) && count($wpaicg_bui
                     if($wpaicg_builder_type == 'post'){
                         echo 'Posts';
                     }
-                    if($wpaicg_builder_type == 'page'){
+                    elseif($wpaicg_builder_type == 'page'){
                         echo 'Pages';
                     }
-                    if($wpaicg_builder_type == 'product'){
+                    elseif($wpaicg_builder_type == 'product'){
                         echo 'Products';
+                    }
+                    else{
+                        echo ucwords(str_replace(array('-','_'),'',$wpaicg_builder_type));
                     }
                     ?>
                     <small class="wpaicg-numbers">(<?php echo esc_html($total_converted)?>/<?php echo esc_html($total_data)?>)</small>

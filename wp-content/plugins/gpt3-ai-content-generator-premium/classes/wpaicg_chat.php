@@ -170,7 +170,7 @@ if(!class_exists('\\WPAICG\\WPAICG_Chat')) {
             $wpaicg_save_request = false;
             $wpaicg_nonce = sanitize_text_field($_REQUEST['_wpnonce']);
             if ( !wp_verify_nonce( $wpaicg_nonce, 'wpaicg-chatbox' ) ) {
-                $wpaicg_result['msg'] = 'Invalid nonce. This means we are unable to verify the validity of the nonce. This issue may be caused by a caching plugin. Please clear your cache and try again.';
+                $wpaicg_result['msg'] = 'Invalid nonce. This means we are unable to verify the validity of the nonce. There are couple of possible reasons for this. 1. A cache plugin is caching the nonce. 2. The nonce has expired. 3. Invalid SSL certificate. 4. Network issue. Please check and try again.';
             } else {
                 $wpaicg_message = ( isset( $_REQUEST['message'] ) && !empty($_REQUEST['message']) ? sanitize_text_field( $_REQUEST['message'] ) : '' );
 //                $wpaicg_message = urldecode($wpaicg_message);

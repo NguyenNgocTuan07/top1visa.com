@@ -28,6 +28,8 @@ if(isset($_GET['sub_action']) && sanitize_text_field($_GET['sub_action']) == 'de
 $wpaicg_bulks = get_posts(array('post_type' => 'wpaicg_bulk','post_status' => array('publish','pending','draft','trash','inherit'),'post_parent' => $wpaicg_track_id,'posts_per_page' => -1));
 $wpaicg_bulk_completed = true;
 if($wpaicg_bulks && is_array($wpaicg_bulks)):
+// create nonce
+$wpaicg_nonce = wp_create_nonce('wpaicg_nonce_action');
 ?>
 <style>
     .wpaicg-bulk-track-status, .wpaicg-bulk-item-span{
@@ -35,6 +37,7 @@ if($wpaicg_bulks && is_array($wpaicg_bulks)):
     }
 </style>
     <div id="wpaicg-bulk-track">
+    <input type="hidden" id="wpaicg_nonce" name="wpaicg_nonce" value="<?php echo esc_attr($wpaicg_nonce); ?>">
         <h2>Auto Content Writer</h2>
         <p style="padding: 6px 12px;border: 1px solid green;border-radius: 3px;background: lightgreen;">You can leave this page and return at a later time.</p>
         <table class="wp-list-table widefat fixed striped table-view-list comments">
@@ -96,7 +99,7 @@ if($wpaicg_bulks && is_array($wpaicg_bulks)):
                     }
                     ?>
                 </td>
-                <td><?php echo $wpaicg_bulk->menu_order && $wpaicg_bulk->menu_order > 0 ? get_term($wpaicg_bulk->menu_order)->name : '--'?></td>
+                <td><?php echo $wpaicg_bulk->menu_order && $wpaicg_bulk->menu_order > 0 ? esc_html(get_term($wpaicg_bulk->menu_order)->name) : '--'?></td>
                 <td class="wpaicg-bulk-item-duration"><?php echo !empty($wpaicg_generator_run) ? esc_html($this->wpaicg_seconds_to_time((int)$wpaicg_generator_run)): ''?></td>
                 <td class="wpaicg-bulk-item-token"><?php echo esc_html($wpaicg_generator_token)?></td>
                 <td class="wpaicg-bulk-item-word"><?php echo esc_html($wpaicg_generator_length)?></td>
@@ -142,7 +145,11 @@ if($wpaicg_bulks && is_array($wpaicg_bulks)):
                 wpaicg_Tracking = setInterval(function(){
                     $.ajax({
                         url: '<?php echo admin_url('admin-ajax.php')?>',
-                        data: {action: 'wpaicg_bulk_status',ids: wpaicg_track_ids},
+                        data: {
+                            action: 'wpaicg_bulk_status',
+                            ids: wpaicg_track_ids,
+                            wpaicg_nonce: $('#wpaicg_nonce').val()
+                        },
                         dataType: 'JSON',
                         type: 'POST',
                         success: function (res){
@@ -211,7 +218,11 @@ if($wpaicg_bulks && is_array($wpaicg_bulks)):
                     }
                     $.ajax({
                         url: '<?php echo admin_url('admin-ajax.php')?>',
-                        data: {action: 'wpaicg_bulk_cancel',ids: wpaicg_track_cancel},
+                        data: {
+                            action: 'wpaicg_bulk_cancel',
+                            ids: wpaicg_track_cancel,
+                            wpaicg_nonce: $('#wpaicg_nonce').val()
+                        },
                         dataType: 'JSON',
                         type: 'POST',
                         success: function (res){

@@ -19,4 +19,6 @@ require_once __DIR__.'/classes/wpaicg_woocommerce.php';
 require_once __DIR__.'/classes/wpaicg_regenerate_title.php';
 require_once __DIR__.'/classes/wpaicg_hook.php';
 require_once __DIR__.'/classes/wpaicg_search.php';
+require_once __DIR__.'/classes/wpaicg_rss.php';
 require_once __DIR__.'/classes/wpaicg_template.php';
+require_once __DIR__.'/classes/wpaicg_editor.php';

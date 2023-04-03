@@ -117,7 +117,7 @@ class Wp_Ai_Content_Generator_Admin
             'manage_options',
             'wpaicg',
             array( $this, 'wpaicg_api_settings' ),
-            'dashicons-megaphone',
+            WPAICG_PLUGIN_URL.'public/images/icon.png',
             6
         );
     }

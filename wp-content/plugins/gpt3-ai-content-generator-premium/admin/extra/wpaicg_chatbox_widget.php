@@ -23,10 +23,10 @@ if($wpaicg_bot_content && isset($wpaicg_bot_content->post_id)){
         }
         $wpaicg_chat_widget = json_decode($wpaicg_bot->post_content, true);
         $wpaicg_chat_status = 'active';
-        $wpaicg_you = isset($wpaicg_chat_widget['you']) && empty($wpaicg_chat_widget['you']) ? $wpaicg_chat_widget['you'] : $wpaicg_you;
-        $wpaicg_typing_placeholder = isset($wpaicg_chat_widget['placeholder']) && empty($wpaicg_chat_widget['placeholder']) ? $wpaicg_chat_widget['placeholder'] : $wpaicg_typing_placeholder;
-        $wpaicg_welcome_message = isset($wpaicg_chat_widget['welcome']) && empty($wpaicg_chat_widget['welcome']) ? $wpaicg_chat_widget['welcome'] : $wpaicg_welcome_message;
-        $wpaicg_ai_name = isset($wpaicg_chat_widget['ai_name']) && empty($wpaicg_chat_widget['ai_name']) ? $wpaicg_chat_widget['ai_name'] : $wpaicg_ai_name;
+        $wpaicg_you = isset($wpaicg_chat_widget['you']) && !empty($wpaicg_chat_widget['you']) ? $wpaicg_chat_widget['you'] : $wpaicg_you;
+        $wpaicg_typing_placeholder = isset($wpaicg_chat_widget['placeholder']) && !empty($wpaicg_chat_widget['placeholder']) ? $wpaicg_chat_widget['placeholder'] : $wpaicg_typing_placeholder;
+        $wpaicg_welcome_message = isset($wpaicg_chat_widget['welcome']) && !empty($wpaicg_chat_widget['welcome']) ? $wpaicg_chat_widget['welcome'] : $wpaicg_welcome_message;
+        $wpaicg_ai_name = isset($wpaicg_chat_widget['ai_name']) && !empty($wpaicg_chat_widget['ai_name']) ? $wpaicg_chat_widget['ai_name'] : $wpaicg_ai_name;
     }
 }
 /*End check*/

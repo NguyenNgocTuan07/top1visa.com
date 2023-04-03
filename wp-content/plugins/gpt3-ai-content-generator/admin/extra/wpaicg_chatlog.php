@@ -1,5 +1,11 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+// Verify nonce
+if (isset($_GET['wpaicg_nonce']) && !wp_verify_nonce($_GET['wpaicg_nonce'], 'wpaicg_chatlogs_search_nonce')) {
+    die('Security check failed');
+}
+
 global $wpdb;
 $wpaicg_log_page = isset($_GET['wpage']) && !empty($_GET['wpage']) ? sanitize_text_field($_GET['wpage']) : 1;
 $search = isset($_GET['wsearch']) && !empty($_GET['wsearch']) ? sanitize_text_field($_GET['wsearch']) : '';
@@ -12,8 +18,8 @@ $total_query = "SELECT COUNT(1) FROM (${query}) AS combined_table";
 $total = $wpdb->get_var( $total_query );
 $items_per_page = 10;
 $offset = ( $wpaicg_log_page * $items_per_page ) - $items_per_page;
-$wpaicg_logs = $wpdb->get_results( $query . " ORDER BY created_at DESC LIMIT ${offset}, ${items_per_page}" );
-$totalPage         = ceil($total / $items_per_page);
+$wpaicg_logs = $wpdb->get_results( $wpdb->prepare( $query . " ORDER BY created_at DESC LIMIT %d, %d", $offset, $items_per_page ) );
+$totalPage = ceil($total / $items_per_page);
 ?>
 <style>
     .wpaicg_modal{
@@ -41,6 +47,7 @@ $totalPage         = ceil($total / $items_per_page);
 <form action="" method="get">
     <input type="hidden" name="page" value="wpaicg_chatgpt">
     <input type="hidden" name="action" value="logs">
+    <?php wp_nonce_field('wpaicg_chatlogs_search_nonce', 'wpaicg_nonce'); ?>
     <div class="wpaicg-d-flex mb-5">
         <input style="width: 100%" value="<?php echo esc_html($search)?>" class="regular-text" name="wsearch" type="text" placeholder="Type for search">
         <button class="button button-primary">Search</button>
@@ -113,7 +120,7 @@ $totalPage         = ceil($total / $items_per_page);
             ?>
             <tr>
                 <td><?php echo esc_html($wpaicg_log->id)?></td>
-                <td><?php echo date('d.m.Y H:i',esc_html($wpaicg_log->created_at))?></td>
+                <td><?php echo esc_html(date('d.m.Y H:i',$wpaicg_log->created_at))?></td>
                 <td><?php echo esc_html(substr($last_user_message,0,255))?></td>
                 <td><?php echo esc_html(substr($last_ai_message,0,255))?></td>
                 <td><?php echo esc_html($wpaicg_log->page_title)?></td>

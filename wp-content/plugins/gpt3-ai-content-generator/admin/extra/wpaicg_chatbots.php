@@ -829,7 +829,7 @@ $wpaicg_roles = wp_roles()->get_names();
                             <li class="wpaicg-ai-message" style="color: <?php echo esc_html($wpaicg_chat_fontcolor)?>; font-size: <?php echo esc_html($wpaicg_chat_fontsize)?>px; background-color: <?php echo esc_html($wpaicg_ai_bg_color);?>">
                                 <p>
                                     <strong style="float: left" class="wpaicg-chat-avatar">AI: </strong>
-                                    <span class="wpaicg-chat-message">Hello human, I am a GPT powered AI chat bot. Ask me anything!</span>
+                                    <span class="wpaicg-chat-message wpaicg_chatbot_welcome_message">Hello human, I am a GPT powered AI chat bot. Ask me anything!</span>
                                 </p>
                             </li>
                         </ul>
@@ -991,7 +991,7 @@ $wpaicg_bots = new WP_Query($args);
         $(document).on('click','.wpaicg_chatbot_save_logs,.wpaicg_chatbot_log_notice,.wpaicg_chatbot_audio_enable,.wpaicg_chatbot_use_avatar,.wpaicg_chatbot_icon_default,.wpaicg_chatbot_ai_avatar_default,.wpaicg_chatbot_ai_avatar_custom,.wpaicg_chatbot_icon_custom', function(){
             wpaicgUpdateRealtime();
         })
-        $(document).on('input','.wpaicg_chatbot_log_notice_message,.wpaicg_chatbot_footer_text,.wpaicg_chatbot_ai_name,.wpaicg_chatbot_you,.wpaicg_chatbot_placeholder,.wpaicg_chatbot_height,.wpaicg_chatbot_width', function(){
+        $(document).on('input','.wpaicg_chatbot_welcome,.wpaicg_chatbot_log_notice_message,.wpaicg_chatbot_footer_text,.wpaicg_chatbot_ai_name,.wpaicg_chatbot_you,.wpaicg_chatbot_placeholder,.wpaicg_chatbot_height,.wpaicg_chatbot_width', function(){
             wpaicgUpdateRealtime();
         });
         $(document).on('click', '.wpaicg_chatbot_save_logs', function(e){
@@ -1034,6 +1034,9 @@ $wpaicg_bots = new WP_Query($args);
             let welcome = modalContent.find('.wpaicg_chatbot_welcome').val();
             let footer = modalContent.find('.wpaicg_chatbot_footer_text').val();
             let previewWidth = modalContent.find('.wpaicg-bot-preview').width();
+            if(welcome !== ''){
+                modalContent.find('.wpaicg_chatbot_welcome_message').html(welcome);
+            }
             if(save_log && log_notice && log_notice_msg !== ''){
                 modalContent.find('.wpaicg_chatbot_log_preview span').html(log_notice_msg);
                 modalContent.find('.wpaicg_chatbot_log_preview').show();
