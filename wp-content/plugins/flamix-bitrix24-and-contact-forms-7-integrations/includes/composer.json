@@ -1,0 +1,14 @@
+{
+    "name": "flamix/bitrix24-contact-form-7-lead",
+    "require": {
+        "xsuchy09/utm-cookie": "2.0.2",
+        "flamix/b24-lead": "dev-master",
+        "monolog/monolog": "^2.0"
+    },
+    "authors": [
+        {
+            "name": "Flamix",
+            "email": "sales@flamix.email"
+        }
+    ]
+}
