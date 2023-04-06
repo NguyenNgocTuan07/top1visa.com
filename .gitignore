@@ -4,6 +4,8 @@
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
 wp-content/*
+wp-admin/*
+wp-includes/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
@@ -21,3 +23,4 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+*.php
