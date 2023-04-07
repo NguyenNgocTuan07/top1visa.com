@@ -4,7 +4,7 @@ Tags: chatgpt, gpt, openai, ai, ai assistant, chatbot, speech, whisper, image ge
 Requires at least: 5.0.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 1.6.22
+Stable tag: 1.6.33
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -41,8 +41,14 @@ Please read documentation here: <a href="https://gptaipower.com/">https://gptaip
 * Speech-to-Post
 * Model Comparison Tool
 * 40 langauge support
+
+== How to Generate OpenAI API Key ==
+
+https://www.youtube.com/watch?v=d0GSPU4P7FI
  
-https://www.youtube.com/watch?v=lmT_ctVA8iI
+== How to Use Content Writer - Express Mode ==
+
+https://www.youtube.com/watch?v=ZBJyhr_DlxE
 
 GPT AI Power is a comprehensive WordPress plugin that leverages the power of OpenAI's GPT language model to generate high-quality content, images, and forms for your website. 
 
@@ -75,11 +81,13 @@ https://www.youtube.com/watch?v=hetYOlR-ms4
 * DALL-E and Stable Diffusion for Image Generator.
 * Pinecone for building content and long term external memory for chat bot.
 * WooCommerce for product writing.
+* Google Sheets.
+* RSS Feeds.
 
 == Features ==
 
-* Generate high-quality, longer articles using OpenAI's GPT-3 language model (text-davinci-003) and GPT-3.5 Turbo.
-* Support for 23 different languages, including English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Dutch, Indonesian, Turkish, Polish, Ukrainian, Arabic, Romanian, Greek, Czech, Bulgarian, Swedish and Hungarian.
+* Generate high-quality, longer articles using OpenAI's GPT language models (text-davinci-003), GPT-3.5 Turbo and GPT-4.
+* Support for 40 different languages, including English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Dutch, Indonesian, Turkish, Polish, Ukrainian, Arabic, Romanian, Greek, Czech, Bulgarian, Swedish and Hungarian.
 * Customize the generated content with options for temperature, maximum tokens, top p, best of, frequency penalty, and presence penalty.
 * Customize the generated content with options for writing style, including informative, descriptive, creative, narrative, persuasive, expository, reflective, argumentative, analytical, critical, evaluative, journalistic, technical and simple.
 * Adjust the tone of the generated content with options for formal, neutral, assertive, cheerful, humorous, informal, inspirational, sarcastic, professional and skeptical.
@@ -123,6 +131,7 @@ https://www.youtube.com/watch?v=hetYOlR-ms4
 * [PREMIUM] Make keywords bold
 * [PREMIUM] Ability to Add Q&A
 * [PREMIUM] Ability to schedule posts.
+* [PREMIUM] Google Sheets integration.
 
 == Supported Languages ==
 * Afrikaans
@@ -218,235 +227,59 @@ This message is coming from OpenAI, not from our plugin. It means that you have 
 
 == Changelog ==
 
-= 1.6.22 =
-Improvement: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following module: ai forms.
-Security: Nonce verification added for ai forms - settings.
+= 1.6.33 =
+Fix: Fixed an issue where hyperlinks containing spaces (%20) were being removed in the chat.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
 Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.21 =
-Improvement: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following module: auto content writer, chat logs and ai forms.
-Security: Nonce verification added for auto content writer, chat logs and ai forms.
+= 1.6.32 =
+Fix: Fixed an issue where the presence of a keyword in a heading tag caused improper rendering of the tag.
+Fix: Fixed an issue where when creating a new chatbot-widget via "Chat Bots," the custom text override for "AI Thinking" was not functioning. The frontend widget continued to display "AI Thinking…" instead of the intended custom text.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
 Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.20 =
-Improvement: Customize all buttons in AI Forms by visiting your form and accessing the Front-end tab. Rename buttons as desired. You can personalize the notification text too.
-Improvement: Customize all buttons in Image Generator by navigating to Image Generator - Settings and renaming buttons according to your preferences.
+= 1.6.31 =
+Improvement: More built-in prompts have been added for Playground.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
-Note: I just started using Twitter. Connect with me at [Twitter](https://twitter.com/sengpt).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.19 =
-Improvement: Added more built-in prompts for AI Assistant.
+= 1.6.30 =
+Fix: Fixed an issue where updating a template would revert to the default one while in custom mode.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.18 =
-[New Feature]: Introducing AI Assistant! Compatible with Gutenberg, Classic Editor, and WooCommerce. To access it, simply navigate to your Editor and locate our symbol in the menu. Choose from various tools and customize your prompts by visiting Settings - Assistant.
+= 1.6.29 =
+Improvement: Code has been cleaned up, and all security enhancements are now complete. We can now concentrate on developing new features.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.17 =
-[New Feature]: Introducing AI Assistant! Compatible with Gutenberg, Classic Editor, and WooCommerce. To access it, simply navigate to your Editor and locate our symbol in the menu. Choose from various tools and customize your prompts by visiting Settings - Assistant.
+= 1.6.28 =
+Improvement: SQL injection and XSS prevention measures have been implemented. Our plugin is now more secure and reliable than ever before. With a robust and secure plugin, we can now focus on refining existing features and introducing new ones.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.16 =
-Improvement: Enhanced image settings. You can now achieve significantly better quality Dall-E images. Navigate to Settings > Image tab and click on More Settings. From there, you can adjust parameters such as photography, camera, lighting, composition, resolution and color. Experiment with these values until you discover the optimal settings for your images.
-Fix: Fixed single and multiline parsing issues in Playground.
-Tweak: Updated the menu icon for the plugin.
+= 1.6.27 =
+Improvement: Significant security improvements. Complete revamp of the codebase. Nonce verification has been added to all forms. All relevant variables have been escaped. SQL injection and XSS prevention measures have been implemented. Our plugin is now more secure and reliable than ever before. With a robust and secure plugin, we can now focus on refining existing features and introducing new ones.
 Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.15 =
+= 1.6.26 =
+Improvement: More built-in prompts have been added to the Playground.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-[Improvement]: Added Elementor support for Embeddings. If you have pages designed with Elementor, consider reindexing them.
-[New Feature - Pro Only]: Embeddings now supports Custom Post Types.
-[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+= 1.6.25 =
+Improvement: New built-in prompts have been added to the Playground.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.14 =
-[New Feature - Pro Only]: Pro plan users now can generate content from RSS.
-[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+= 1.6.24 =
+Fix: Updated notice under Google sheets.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).
 
-= 1.6.13 =
-
-[Fix]: wp_clear_scheduled_hook has now been added to the deactivator, ensuring cron events are cleaned up if the plugin gets deactivated.
-[Tweak]: Added more built-in prompts to Playground. Made some CSS adjustments. Limited the number of answers to one.
-[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
-
-
-= 1.6.12 =
-
-[Fix]: Fixed an issue where welcome message was not saving when creating a new widget.
-[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
-
-
-= Version 1.6.11 =
-
-[Improvement]: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following module: auto content writer.
-[Security]: Nonce verification added for queue deletion, bulk settings and bulk tracking.
-[Security]: Escaped some variables in bulk tracking.
-[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
-
-= Version 1.6.10 =
-
-[Improvement]: My primary focus right now is on enhancing security to make the plugin more secure, robust, and reliable. This update includes several security improvements in following modules: fine-tune, auto content writer, embeddings and chat log.
-[Fix]: Bug fix in the Freemius library used to communicate with the API throwing fatal error.
-[Note]: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
-
-= Version 1.6.9 =
-
-[Improvement]: Implemented $wpdb->prepare in bulk queue.
-[Tweak]: Modified pre-defined header tag from h1 to h2 in Custom Mode.
-
-= Version 1.6.8 =
-[Fix]: Fixed chmod permissions for auto content writer and index builder.
-[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
-
-= Version 1.6.7 =
-[Improvement]: Added Categories and some sample prompts under Playground.
-[Improvement]: Added more precise error messages for issues related to invalid nonces.
-[Improvement]: Added Instant Embedding notice under Index Builder.
-[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
-
-= Version 1.6.6 =
-
-[Improvement]: Made some visual adjustments in Content Writer.
-[Improvement]: If GPT-4 or GPT-4-32K is selected then we are displaying a little notice for the users that these models are not available to everyone yet.
-[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
-
-= Version 1.6.5 =
-
-[Improvement]: New content type added for manual entries in Embeddings: Contact List. You can now embed your contact list for the chat bot.
-[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
-
-= Version 1.6.4 =
-
-[Tweak]: Tweaked some css.
-[Improvement]: Instant Embedding, Custom Mode guideds added.
-[Fix]: Fixed some typos.
-[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
-
-= Version 1.6.3 =
-
-[Fix]: Fixed max token issue for Custom Mode and Comparison Tool. Added validation for maximum token input based on the selected model. The maximum token input now ranges between 0 and 2049 for "text-ada-001," "text-babbage-001," and "text-curie-001" models. The range for "gpt-3.5-turbo" and "text-davinci-003" models is 0 to 4096, while for "gpt-4" model it is 0 to 8192, and for "gpt-4-32k" model it is 0 to 32768.
-[Note]: Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post). Your feedback motivating me a lot and making me very happy. Thank you ❤️😊
-
-= Version 1.6.2 =
-[Tweak]: Tweaked custom content writer prompt.
-[Tweak]: Added "Limited Beta" notice for gpt-4.
-[Fix]: Fixed some typos.
-[Note]: I am working hard to make this plugin accessible to everyone. Please [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post) to support my work and motivate me.
-
-= Version 1.6.1 =
-
-[Fix]: Fixed an issue where some parameters was shown different in the log files.
-[Fix]: Fixed an issue with code indentation in chat response.
-[Fix]: Fixed token limit for custom chatbots.
-[Note]: I am working hard to make this plugin accessible to everyone. Please [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post) to support my work and motivate me.
-
-= Version 1.6 =
-
-[Fix]: Fixed an issue where token limit was not working properly for AI Forms.
-[Fix]: Fixed an issue regarding parsing some special characters in chat response.
-
-= Version 1.5.99 =
-
-[New Feature]: Added Custom Mode under Content Writer. You can now generate content using your own prompts. You can also save your templates. To use this new feature go to Content Writer - Custom Mode tab.
-
-= Version 1.5.98 =
-
-[Improvement]: Added error handling for Stable Diffusion.
-[Improvement]: Upgraded default version to the latest for Stable Diffusion. To upgrade, if you are using SD with the default version, enter this new version number (db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf) in the version field under Settings > Image tab.
-
-= 1.5.97 =
-
-This release introduces several new improvements:
-
-[Improvement]: Customization of built-in AI forms is now possible. Navigate to any AI form, click on it, and select the "Customize" button. This will open a design form for you to edit and personalize the existing forms.
-[Improvement]: Token limits can now be set for both registered and non-registered users for AI forms and Image Generator. Go to AI forms / Image Generator, navigate to the settings tab, and configure your token limits.
-[Improvement]: User role-based token limits are now available for chat, image, and AI forms.
-[Improvement]: A price limit can now be set for the image generator.
-[Improvement]: Default settings can be applied to the image generator, eliminating the need to adjust settings each time.
-[Improvement]: Custom prompts can be used for the WooCommerce product writer. To use your own prompts instead of built-in ones, go to Settings > WooCommerce and add your custom prompts. Remember to include %s in your prompt, as it is necessary for the product title.
-[Improvement]: Prompt details are now accessible in the chat log, making it easier to examine the content retrieved from Embeddings or Excerpts and optimize them accordingly. To view these details, go to Chat logs, click the View button for any conversation, and look for the "Request" link. Clicking on it will reveal all relevant information. Please note: you need to enable "Save Prompt" feature under Logs.
-[Fix]: Fixed an issue where token reset settings were not retained after saving.
-[Fix]: Fixed an issue concerning improper indentation of code blocks within chat responses.
-[Fix]: Fixed an issue where there was a CSS conflict with another plugin.
-[Tweak]: Moved Playground and Comparison tool under Content Writer.
-
-= 1.5.96 =
-* [Fix]: Fixed an issue with the search function in form logs.
-
-= 1.5.95 =
-* [New Feature]: Introducing the Model Comparison Tool. You can now compare various AI engines and evaluate their speed, word count, token usage, and estimated cost. Simply navigate to the Playground and select the Comparison Tool tab.
-
-= 1.5.94 =
-* [Improvement]: Enhanced AI forms, PromptBase and Image Generator with logging features for token usage, duration, estimated cost etc..
-* [Fix]: Fixed an issue where saving the chatbot did not retain the custom avatar and the "no answer" notice.
-
-= 1.5.93 =
-* [Fix]: Fixed compatibility issues arising from Freemius custom SDKs. This fix does not pertain to the plugin itself, but rather to the Freemius SDK.
-
-= 1.5.92 =
-* [Fix]: Fixed an issue causing custom chatbot creation to fail when special characters (such as "" or ') are present in the input.
-* [Fix]: Fixed an issue where the font color did not retain after saving.
-
-= 1.5.91 =
-* [New Feature]: Instant Embedding! Quickly embed pages, posts, or products without the need for a cron job. Simply navigate to your post page, select all your posts or products, and press the index button.
-* [Improvement]: Added product short description meta data for WooCommerce embeddings.
-* [Improvement]: Added more models (ada, curie, babbage for AI forms and PromptBase)
-* [Improvement]: Added gpt-4 and gpt-4-32k models. Please be aware: These models are still in beta, and I do not advise using them at this time. If you lack API access, you may encounter a "model does not exist" error. OpenAI is providing API access through a waiting list system. Slow performance in my tests may be due to limitations set by OpenAI on response times.
-
-= 1.5.90 =
-* [New Feature]: Unlimited chatbots! Now, you can create and customize chatbots for separate pages. Navigate to the ChatGPT - Bots tab and click on "Create New Bot."
-
-= 1.5.89 =
-* [Fix]: Fixed chat bot output parsing issues.
-
-= 1.5.88 =
-* [Improvement]: Enhanced chat bot security to prevent SQL injections.
-* [Fix]: Fixed chat bot output parsing issues.
-* [Fix]: Fixed moderation log issues.
-
-= 1.5.87 =
-* [Improvement]: A new content type, "Pricing Plans" has been added for Embeddings. You can now input your pricing plans into the chatbot. Available fields include plan name, price, plan url and plan features.
-* [Tweak]: Fixed some metadata issues with the content builder for embeddings.
-
-= 1.5.86 =
-* [Improvement]: A new content type, "Event," has been added for embeddings. You can now input your event data into the chatbot. Available fields include event name, date, time, location, organizer, and URL.
-
-= 1.5.85 =
-* [Improvement]: Meta data is enabled for embeddings. You may want to reindex your pages if you'd like to include meta data in your embeddings, such as: Post Title: XXX, Post URL: XXX, Post Categories: XXX, etc. This is useful if you want your bot to provide the URL of a page when asked.
-
-= 1.5.84 =
-* [Improvement]: Added new help pages.
-
-= 1.5.83 =
-* [Improvement]: Updated help pages for ChatGPT - User Aware feature.
-* [Improvement]: Updated help pages for ChatGPT - Moderation feature.
-
-= 1.5.82 =
-* [Fix]: Fixed couple of style and tone issues in the content writer.
-* [Fix]: Implemented wp_clear_scheduled_hook to remove cron jobs upon plugin deactivation, ensuring a clean environment.
-
-= 1.5.81 =
-* [New Feature - Pro Only]: Introducing the Chat Bot Moderation feature. It enables you to effectively moderate and manage your chat conversations, ensuring compliance with OpenAI's content and usage policies.
-* [Fix]: Fixed an issue where the Edit button would not function properly if there were Unicode characters in the AI form title.
-* [Fix]: Fixed an issue with Audio Converter.
-
-= 1.5.80 =
-* [Fix]: Fixed cron job issue for token handling.
-
-= 1.5.79 =
-* [New Feature]: User Awareness - Enable your chatbot to become user-aware. It's a simple process: If the user is registered, their display name is retrieved from their profile. If the display name is empty, the username is retrieved and provided to the bot. Now the bot knows who it's chatting with! Note that this feature only works with registered users.
-
-= 1.5.78 =
-* [Improvement]: Added meta information for the WooCommerce products when using Index Builder. Previously we were only embedding the product description without any meta data. Now we are appending SKU, product title, name, description, sale price, regular price, stock status, product url and other variables. So if you'd like to include meta data in your embeddings, you may consder reindexing your products.
-* [Fix]: Fixed an issue with Re-index functionality in Embeddings.
-
-= 1.5.77 =
-* [Fix]: Fixed unicode issue in AI forms.
-* [Fix]: Moved enable/disable option to the top for the widget.
-* [Fix]: Fixed anchor text issue.
-
-= 1.5.76 =
-* [Fix]: Fixed an escape variable issue in the chat widget for the AI avatar.
-* [Fix]: Fixed an escape variable issue in the chat shortcode for the AI avatar.
-* [Improvement]: Help pages have been updated with Voice Input and Token Handling features for chat widget.
+= 1.6.23 =
+Fix: Fixed an issue with the Stable Diffusion image generator where the view button for the second image was displaying the first image.
+New: Added Google Sheets integration for the auto content writer feature. This is available in Pro plan.
+Note: Your feedback motivating me a lot ❤️😊. Please show your support and [leave a review](https://wordpress.org/support/plugin/gpt3-ai-content-generator/reviews/#new-post).
+Note: Connect with me at [Twitter](https://twitter.com/sengpt).

@@ -194,7 +194,7 @@ if(typeof wpaicgForm !== "undefined" && wpaicgForm != undefined && wpaicgForm.le
                 var wpaicg_limitLines = parseFloat(wpaicgMaxLines.value);
                 var count_line = 0;
                 var currentContent = '';
-                queryString += '&source_stream=form';
+                queryString += '&source_stream=form&nonce='+wpaicgAjaxNonce;
                 eventGenerator = new EventSource(wpaicgEventURL + '&' + queryString);
                 var wpaicg_response_events = 0;
                 var wpaicg_newline_before = false;
@@ -285,7 +285,7 @@ if(wpaicgUserLoggedIn && typeof wpaicgSaveDraftBtn != 'undefined'){
             const xhttp = new XMLHttpRequest();
             xhttp.open('POST', wpaicgAjaxUrl);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send('action=wpaicg_save_draft_post_extra&title=' + title + '&content=' + content+'&save_source=promptbase');
+            xhttp.send('action=wpaicg_save_draft_post_extra&title=' + title + '&content=' + content+'&save_source=promptbase&nonce='+wpaicgAjaxNonce);
             wpaicgLoadingBtn(wpaicgSaveDraftBtn);
             xhttp.onreadystatechange = function (oEvent) {
                 if (xhttp.readyState === 4) {

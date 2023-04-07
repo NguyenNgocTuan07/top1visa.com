@@ -55,7 +55,7 @@
         }
         jQuery.ajax({
             url: wpaicg_editor_ajax_url,
-            data: {action: 'wpaicg_editor_prompt', prompt: prompt},
+            data: {action: 'wpaicg_editor_prompt', prompt: prompt,nonce: wpaicg_editor_wp_nonce},
             dataType: 'JSON',
             type: 'POST',
             beforeSend: function (){
